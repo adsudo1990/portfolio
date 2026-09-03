@@ -535,6 +535,18 @@ ul{ margin:0; padding:0; list-style:none; }
   margin-bottom:6px;
 }
 .stat-label{ color:var(--ink-soft); font-size:.85rem; }
+/* un solo dato destacado (clientes) en vez de la grilla de 4 —
+   los stats en años se sacaron para no repetir/contradecir el dato
+   de experiencia, que ahora vive solo en el texto de "Sobre mí" */
+.stats--single{
+  grid-template-columns:1fr;
+}
+.stats--single .stat{
+  padding:36px 30px;
+  text-align:center;
+}
+.stats--single .stat-num{ font-size:3rem; margin-bottom:10px; }
+.stats--single .stat-label{ font-size:.95rem; }
 
 /* ===================================================================
    PORTFOLIO
