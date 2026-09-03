@@ -1,54 +1,80 @@
 # Sergio Visgarra — Portfolio
 
-Landing page personal de Sergio Visgarra (Diseñador Gráfico / Web / UX-UI / 3D). Sitio estático, sin build step — HTML/CSS/JS plano.
+Landing personal de Sergio Visgarra (Diseñador Digital / Web / UX-UI / 3D).
+Sitio estático, sin build step — HTML/CSS/JS plano + GSAP para las animaciones de scroll.
+
+**Repo:** https://github.com/adsudo1990/portfolio
 
 ## Estructura
 
 ```
-index.html
+index.html        → home (hero, skills, statement, sobre mí, portfolio, 3D, experiencia, contacto)
+portfolio.html    → "Todos los proyectos" (GitHub + Behance + reel vertical)
 css/style.css
 js/main.js
-assets/img/       → capturas reales de los proyectos del portfolio
-assets/cv/        → CV en PDF (ya no se linkea desde el sitio, se sacó el botón de descarga)
+assets/img/       → capturas reales de los proyectos
+dev-server.py     → servidor local que NO cachea (solo para desarrollo)
 ```
 
 ## Ver en local
 
 ```bash
-python -m http.server 8731
+python dev-server.py 8731
 # abrir http://localhost:8731
 ```
 
-## Deploy — GitHub Pages + Cloudflare Pages
+Usa `dev-server.py` en vez de `python -m http.server`: el servidor por defecto
+cachea los archivos y los cambios no aparecen sin hard-refresh.
 
-1. **Crear el repo en GitHub** (podés usar el sitio o `gh repo create` si tenés el CLI instalado):
-   - Nombre sugerido: `sergio-portfolio` o `portfolio`
-   - Público
+## Animaciones y accesibilidad
 
-2. **Subir el código**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Portfolio inicial"
-   git branch -M main
-   git remote add origin https://github.com/adsudo1990/<nombre-del-repo>.git
-   git push -u origin main
-   ```
+`js/main.js` maneja tres efectos ligados al scroll:
 
-3. **Conectar Cloudflare Pages** (recomendado, deploy automático en cada push):
-   - Andá a [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create application** → pestaña **Pages** → **Connect to Git**
-   - Elegí el repo `adsudo1990/<nombre-del-repo>`
-   - Framework preset: **None**
-   - Build command: *(vacío, no hace falta)*
-   - Build output directory: `/` (la raíz del repo)
-   - **Save and Deploy**
-   - Con eso ya te da una URL tipo `<nombre-del-repo>.pages.dev`
-   - Opcional: en **Custom domains**, sumale tu propio dominio si tenés uno en Cloudflare
+1. **Traspaso hero → tarjeta de skills**: la foto del hero se achica/rota/desvanece
+   mientras la tarjeta del mosaico crece y se asienta.
+2. **Giro 3D de la tarjeta**: al recorrer las fichas de skills, la tarjeta gira y
+   muestra "Trabajemos juntos" (linkea a contacto).
+3. **Statement palabra por palabra**: el texto grande se va encendiendo con el scroll.
 
-4. Cada `git push` a `main` redeploya solo — no hay que tocar nada más.
+Si el sistema pide reducir movimiento (`prefers-reduced-motion`), el **traspaso del
+hero** pasa a un fundido simple. El **giro de la tarjeta se mantiene** por ser un
+elemento chico y contenido (sin parallax ni desplazamiento de página).
 
-## Pendientes / a completar
+### Parámetros de URL útiles para depurar
 
-- [ ] Sumar capturas del proceso 3D (ZBrush/Substance Painter) a Behance y linkear desde la sección "3D como hobby"
-- [ ] Si sumás un dominio propio en Cloudflare, actualizar el `og:url` / metadata si se agrega
-- [ ] El formulario de contacto abre el cliente de mail del visitante (`mailto:`) — no hay backend. Si en algún momento querés un formulario real sin depender del cliente de mail, se puede armar con un Cloudflare Worker (mismo patrón que ya usás en el proyecto de Icon Digital)
+| Parámetro | Efecto |
+|---|---|
+| `?motion=on` | Fuerza movimiento completo aunque el SO pida reducirlo |
+| `?motion=off` | Desactiva todas las animaciones de scroll |
+| `?debug=1` | Panel con estado de GSAP, reduce-motion y progreso de cada ScrollTrigger |
+
+> **Nota sobre los rangos de scroll:** los `ScrollTrigger` usan rangos explícitos con
+> mínimo garantizado (`end: '+=' + Math.max(600, ...)`). Con `end: 'bottom bottom'` el
+> rango colapsaba a 0 en ventanas más altas que la grilla de tarjetas (pantallas
+> grandes) y la animación no corría nunca.
+
+## Deploy
+
+### GitHub Pages (actual)
+
+En el repo → **Settings › Pages › Source: Deploy from a branch › `main` › `/(root)`**.
+Queda publicado en `https://adsudo1990.github.io/portfolio/`.
+
+### Cloudflare Pages (opcional)
+
+[dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create
+application** → **Pages** → **Connect to Git** → repo `adsudo1990/portfolio`.
+Framework preset **None**, build command vacío, output directory `/`.
+Permite sumar dominio propio y da deploy automático en cada push.
+
+## Pendientes
+
+- [ ] **Foto de Sergio** para el hero: hay un placeholder en `index.html`
+      (buscar `hero-photo`). Reemplazar por `assets/img/sergio.jpg`.
+- [ ] Subir capturas del proceso 3D (ZBrush / Substance Painter) a Behance
+      y linkear desde la sección "3D como hobby".
+- [ ] Reemplazar los 3 `.reel-slot` de `portfolio.html` por los videos verticales
+      cuando estén subidos a Cloudflare.
+- [ ] El formulario de contacto abre el cliente de mail del visitante (`mailto:`),
+      no hay backend. Para un formulario real se puede usar un Cloudflare Worker.
+- [ ] El CV en PDF **no** está en el repo a propósito (contiene domicilio y teléfono).
