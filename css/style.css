@@ -489,13 +489,12 @@ ul{ margin:0; padding:0; list-style:none; }
 /* ===================================================================
    ABOUT
    =================================================================== */
-/* la sección ya no tiene columna de stats: el texto solo, corto,
-   centrado en una franja legible en vez de estirarse a todo el ancho */
 .about-grid{
   display:grid;
-  justify-items:center;
+  grid-template-columns:1.5fr 1fr;
+  gap:60px;
+  align-items:center;
 }
-.about-solo{ max-width:640px; text-align:center; }
 .about-text{
   color:var(--ink-soft);
   font-size:1.15rem;
@@ -516,6 +515,26 @@ ul{ margin:0; padding:0; list-style:none; }
 .about-more:hover{ color:var(--accent); }
 /* display:inline-block above would otherwise override the [hidden] attribute */
 .about-more[hidden]{ display:none; }
+/* reel chico en loop en el lugar donde antes iba la ficha de stats.
+   El video que hay hoy está en vertical, así que la tarjeta respeta ese
+   formato (9/16); cuando Sergio pase versiones horizontales, este mismo
+   contenedor puede pasar a aspect-ratio:16/9 sin tocar el resto. */
+.about-media{
+  width:100%;
+  max-width:240px;
+  margin:0 auto;
+  aspect-ratio:9/16;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  background:var(--surface);
+}
+.about-media-video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 
 /* ===================================================================
    PORTFOLIO
@@ -718,6 +737,8 @@ ul{ margin:0; padding:0; list-style:none; }
    RESPONSIVE
    =================================================================== */
 @media (max-width: 900px){
+  .about-grid{ grid-template-columns:1fr; gap:32px; }
+  .about-media{ order:-1; }
   .threed-grid, .contact-grid{ grid-template-columns:1fr; }
   .featured-grid{ grid-template-columns:1fr; }
   .grid-cards{ grid-template-columns:1fr 1fr; }

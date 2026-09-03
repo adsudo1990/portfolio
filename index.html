@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Crete+Round&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=13">
+<link rel="stylesheet" href="css/style.css?v=14">
 <noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
@@ -143,7 +143,7 @@
 <!-- ============ SOBRE MÍ ============ -->
 <section class="section section-alt" id="sobre-mi">
   <div class="wrap about-grid">
-    <div class="reveal-group about-solo">
+    <div class="reveal-group">
       <p class="eyebrow reveal">/ Sobre mí</p>
       <h2 class="h2 reveal">Creativo <span class="accent-text">de fondo</span></h2>
       <p class="about-text reveal" id="aboutText">
@@ -152,6 +152,13 @@
         forma de trabajar.
       </p>
       <button class="about-more reveal" id="aboutMoreBtn" type="button" hidden>Ver más ↓</button>
+    </div>
+    <!-- reel corto en loop, en vez de la ficha de stats — de a poco se van a sumar
+         más videos horizontales acá (este todavía está en formato vertical) -->
+    <div class="about-media reveal">
+      <video class="about-media-video" autoplay muted loop playsinline preload="metadata" aria-label="Reel de trabajos de Sergio Visgarra">
+        <source src="https://pub-9e93c1d149f9435cbb6bc1e7a068f42d.r2.dev/porunmate-1.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
