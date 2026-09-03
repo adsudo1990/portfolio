@@ -290,7 +290,7 @@ ul{ margin:0; padding:0; list-style:none; }
    =================================================================== */
 .skills-layout{
   display:grid;
-  grid-template-columns:1.3fr .9fr;
+  grid-template-columns:1fr 1fr;
   gap:48px;
   align-items:start;
 }
@@ -491,8 +491,8 @@ ul{ margin:0; padding:0; list-style:none; }
    =================================================================== */
 .about-grid{
   display:grid;
-  grid-template-columns:1.5fr 1fr;
-  gap:60px;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
   align-items:center;
 }
 .about-text{
@@ -598,8 +598,8 @@ ul{ margin:0; padding:0; list-style:none; }
    =================================================================== */
 .threed-grid{
   display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:40px;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
   align-items:center;
 }
 .threed-note{
@@ -640,8 +640,8 @@ ul{ margin:0; padding:0; list-style:none; }
    =================================================================== */
 .contact-grid{
   display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:60px;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
 }
 .contact-form{ display:flex; flex-direction:column; gap:18px; max-width:520px; }
 .contact-form label{ display:flex; flex-direction:column; gap:8px; font-size:.85rem; font-weight:600; color:var(--ink); }
