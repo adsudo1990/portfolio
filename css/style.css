@@ -489,15 +489,17 @@ ul{ margin:0; padding:0; list-style:none; }
 /* ===================================================================
    ABOUT
    =================================================================== */
+/* la sección ya no tiene columna de stats: el texto solo, corto,
+   centrado en una franja legible en vez de estirarse a todo el ancho */
 .about-grid{
   display:grid;
-  grid-template-columns:1.5fr 1fr;
-  gap:60px;
-  align-items:start;
+  justify-items:center;
 }
+.about-solo{ max-width:640px; text-align:center; }
 .about-text{
   color:var(--ink-soft);
-  font-size:1.02rem;
+  font-size:1.15rem;
+  line-height:1.6;
   margin:0 0 12px;
   overflow:hidden;
   display:-webkit-box;
@@ -514,39 +516,6 @@ ul{ margin:0; padding:0; list-style:none; }
 .about-more:hover{ color:var(--accent); }
 /* display:inline-block above would otherwise override the [hidden] attribute */
 .about-more[hidden]{ display:none; }
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-.stat{
-  background:var(--surface);
-  border-radius:var(--radius-md);
-  padding:26px 22px;
-  box-shadow:var(--shadow-sm);
-}
-.stat-num{
-  display:block;
-  font-family:var(--font-head);
-  font-weight:700;
-  font-size:2.2rem;
-  color:var(--accent);
-  line-height:1;
-  margin-bottom:6px;
-}
-.stat-label{ color:var(--ink-soft); font-size:.85rem; }
-/* un solo dato destacado (clientes) en vez de la grilla de 4 —
-   los stats en años se sacaron para no repetir/contradecir el dato
-   de experiencia, que ahora vive solo en el texto de "Sobre mí" */
-.stats--single{
-  grid-template-columns:1fr;
-}
-.stats--single .stat{
-  padding:36px 30px;
-  text-align:center;
-}
-.stats--single .stat-num{ font-size:3rem; margin-bottom:10px; }
-.stats--single .stat-label{ font-size:.95rem; }
 
 /* ===================================================================
    PORTFOLIO
@@ -749,10 +718,9 @@ ul{ margin:0; padding:0; list-style:none; }
    RESPONSIVE
    =================================================================== */
 @media (max-width: 900px){
-  .about-grid, .threed-grid, .contact-grid{ grid-template-columns:1fr; }
+  .threed-grid, .contact-grid{ grid-template-columns:1fr; }
   .featured-grid{ grid-template-columns:1fr; }
   .grid-cards{ grid-template-columns:1fr 1fr; }
-  .stats{ grid-template-columns:1fr 1fr; }
 }
 @media (max-width: 640px){
   .section{ padding:64px 0; }
