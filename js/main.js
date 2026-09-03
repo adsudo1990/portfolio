@@ -40,12 +40,6 @@ revealEls.forEach((el) => revealObserver.observe(el));
 const params = new URLSearchParams(location.search);
 const motionParam = params.get('motion');
 const osWantsReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-// `fullMotion` gobierna el movimiento fuerte (escala/rotación del traspaso del hero),
-// que sí puede molestar a quien pide reducir movimiento.
-const fullMotion =
-  motionParam === 'on' ? true :
-  motionParam === 'off' ? false :
-  !osWantsReducedMotion;
 const animationsEnabled = motionParam !== 'off';
 // El giro de la tarjeta es un elemento chico y contenido (no hay parallax ni
 // desplazamiento de página), así que se mantiene en 3D salvo que se pida ?motion=off.
@@ -54,47 +48,24 @@ const flipIn3D = animationsEnabled;
 const hasGsap = !!(window.gsap && window.ScrollTrigger);
 if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
-const heroEl = document.querySelector('.hero');
-const heroPhoto = document.querySelector('.hero-photo');
-const skillsVisual = document.querySelector('.skills-visual');
 const flipCard = document.getElementById('skillsFlipCard');
 const skillsGrid = document.querySelector('.skills-grid');
 
 /* helper: 0→1 progress of how far we've scrolled through [startPx, endPx] */
 const clamp01 = (n) => Math.min(Math.max(n, 0), 1);
-const lerp = (a, b, t) => a + (b - a) * t;
 
 const cardFront = document.querySelector('.skills-visual-front');
 const cardBack = document.querySelector('.skills-visual-back');
 if (!flipIn3D && flipCard) flipCard.classList.add('is-flat'); // cross-fade faces instead of rotating
 
-if (animationsEnabled && heroEl && heroPhoto && skillsVisual && flipCard && skillsGrid) {
+/* ---- the card turns over to "Trabajemos juntos" ----
+   (antes esto vivía junto con el traspaso de la foto del hero, que se sacó al
+   sacar la foto del hero; el giro de la tarjeta queda como efecto independiente).
+   El rango se define con `+=` y un mínimo garantizado. Con `end:'bottom bottom'`
+   el rango colapsaba a 0 en ventanas más altas que la grilla (pantallas grandes),
+   y el giro no llegaba a ejecutarse nunca. */
+if (animationsEnabled && flipCard && skillsGrid) {
   if (hasGsap) {
-    /* ---- 1. hero photo hands off into the skills card ---- */
-    gsap.set([heroPhoto, skillsVisual], { transformOrigin: '50% 50%' });
-    const handoff = gsap.timeline({
-      scrollTrigger: {
-        trigger: heroEl,
-        start: () => 'top top-=' + heroEl.offsetHeight * 0.45,
-        end: () => 'top top-=' + heroEl.offsetHeight * 1.05,
-        scrub: 0.4,
-        invalidateOnRefresh: true,
-      },
-    });
-    if (fullMotion) {
-      handoff
-        .fromTo(heroPhoto, { scale: 1, rotate: 0, opacity: 1 }, { scale: 0.5, rotate: -14, opacity: 0, ease: 'none' }, 0)
-        .fromTo(skillsVisual, { scale: 0.78, rotate: 10, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, ease: 'none' }, 0);
-    } else {
-      handoff
-        .fromTo(heroPhoto, { opacity: 1 }, { opacity: 0, ease: 'none' }, 0)
-        .fromTo(skillsVisual, { opacity: 0 }, { opacity: 1, ease: 'none' }, 0);
-    }
-
-    /* ---- 2. the card turns over to "Trabajemos juntos" ----
-       El rango se define con `+=` y un mínimo garantizado. Con `end:'bottom bottom'`
-       el rango colapsaba a 0 en ventanas más altas que la grilla (pantallas grandes),
-       y el giro no llegaba a ejecutarse nunca. */
     const flipST = {
       trigger: skillsGrid,
       start: 'top top',
@@ -110,26 +81,13 @@ if (animationsEnabled && heroEl && heroPhoto && skillsVisual && flipCard && skil
         .fromTo(cardBack, { opacity: 0 }, { opacity: 1, ease: 'none' }, 0);
     }
   } else {
-    /* ---- vanilla fallback: same two effects without GSAP ---- */
+    /* ---- vanilla fallback: same effect without GSAP ---- */
     console.warn('[portfolio] GSAP no disponible — usando animaciones en JS puro.');
     let ticking = false;
     const render = () => {
       ticking = false;
-      const heroRect = heroEl.getBoundingClientRect();
-      const heroH = heroEl.offsetHeight;
-      const scrolledIntoHero = -heroRect.top;
-
-      // 1. hand-off
-      const handoff = clamp01((scrolledIntoHero - heroH * 0.45) / (heroH * 0.6));
-      heroPhoto.style.opacity = String(1 - handoff);
-      skillsVisual.style.opacity = String(handoff);
-      if (fullMotion) {
-        heroPhoto.style.transform = `scale(${lerp(1, 0.5, handoff)}) rotate(${lerp(0, -14, handoff)}deg)`;
-        skillsVisual.style.transform = `scale(${lerp(0.78, 1, handoff)}) rotate(${lerp(10, 0, handoff)}deg)`;
-      }
-
-      // 2. turn the card over — mismo mínimo garantizado que en la versión GSAP,
-      // si no en ventanas altas el divisor quedaba en 0 o negativo y no giraba nunca
+      // mismo mínimo garantizado que en la versión GSAP, si no en ventanas
+      // altas el divisor quedaba en 0 o negativo y no giraba nunca
       const gridRect = skillsGrid.getBoundingClientRect();
       const scrollable = Math.max(600, gridRect.height - window.innerHeight);
       const flip = clamp01(-gridRect.top / scrollable);
@@ -218,7 +176,6 @@ if (params.get('debug') === '1') {
       `ScrollTriggers creados: <b>${st.length}</b><br>` +
       st.map((s, i) => `  [${i}] progreso: ${s.progress.toFixed(2)}`).join('<br>') +
       `<br>scrollY: ${Math.round(window.scrollY)}<br>` +
-      `foto hero: ${heroPhoto ? getComputedStyle(heroPhoto).opacity : '—'}<br>` +
       `tarjeta: ${flipCard ? getComputedStyle(flipCard).transform.slice(0, 28) : '—'}`;
   };
   paint();

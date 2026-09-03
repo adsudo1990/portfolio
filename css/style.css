@@ -173,77 +173,20 @@ ul{ margin:0; padding:0; list-style:none; }
 .hero-meta{
   color:var(--ink-soft);
   font-size:.98rem;
-  margin:0 auto 40px;
+  margin:0 0 40px;
   max-width:520px;
-  text-align:center;
 }
-.hero-cta{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
 
-/* ---------- hero split: NAME — photo — NAME (Nikola-style layout) ---------- */
-.hero-split{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  grid-template-rows:auto auto auto; /* eyebrow · name · place */
-  align-items:center;
-  gap:0 32px;
-  margin-bottom:36px;
-}
-/* both sides share the parent's rows (subgrid) so "Sergio" and "Visgarra" sit on
-   the same line even though one carries the eyebrow above and the other the place below */
-.hero-split-side{
-  grid-row:1 / span 3;
-  display:grid;
-  grid-template-rows:subgrid;
-  align-content:center;
-}
-.hero-photo{ grid-row:1 / span 3; align-self:center; }
-.hero-split-side .eyebrow{ grid-row:1; margin-bottom:8px; }
-.hero-split-side .hero-name{ grid-row:2; }
-.hero-split-side .hero-place{ grid-row:3; }
-.hero-split-left{ text-align:right; }
-.hero-split-right{ text-align:left; }
-.hero-name--split{ margin:0; white-space:nowrap; }
+/* ---------- hero split: solo el nombre apilado, sin foto (editorial, alineado
+   a la izquierda tanto en desktop como en mobile) ---------- */
+.hero-split{ text-align:left; margin-bottom:36px; }
+.hero-name{ margin:0; }
 .hero-place{
   font-family:var(--font-body);
   font-size:.95rem;
   color:var(--ink-soft);
   margin:10px 0 0;
-}
-.hero-photo{
-  width:220px;
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  aspect-ratio:3/4;
-  box-shadow:var(--shadow);
-}
-.hero-photo img{ width:100%; height:100%; object-fit:cover; }
-.hero-photo-placeholder{
-  width:100%; height:100%;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-  background:var(--surface);
-  border:1.5px dashed var(--line);
-  color:var(--ink-faint);
-  font-size:.75rem;
-  text-align:center;
-}
-@media (max-width: 760px){
-  /* mobile layout replica del moodboard: todo alineado a la izquierda —
-     avatar chico arriba, eyebrow, nombre grande apilado y lugar debajo */
-  .hero-split{ grid-template-columns:1fr; grid-template-rows:none; justify-items:start; text-align:left; gap:10px; }
-  /* en desktop .hero-split-side/.hero-photo usan grid-row:1/span 3 + subgrid para
-     alinear "Sergio" y "Visgarra" en la misma fila; en una sola columna eso hace
-     que el grid abra columnas implícitas y todo quede lado a lado en vez de apilarse */
-  .hero-split-side{ grid-row:auto; grid-template-rows:none; display:block; }
-  .hero-split-side .eyebrow, .hero-split-side .hero-name, .hero-split-side .hero-place{ grid-row:auto; }
-  .hero-split-left, .hero-split-right{ text-align:left; }
-  .hero-name--split{ white-space:normal; }
-  .hero-meta{ text-align:left; margin-left:0; }
-  .hero-cta{ justify-content:flex-start; }
-  /* small circular avatar instead of the full rectangular card, matching how
-     this layout collapses on mobile in the reference site */
-  .hero-photo{ grid-row:auto; order:-1; width:64px; aspect-ratio:1/1; border-radius:50%; margin-bottom:4px; align-self:flex-start; }
-  .hero-photo-placeholder span{ display:none; }
-  .hero-photo-placeholder svg{ width:24px; height:24px; }
 }
 
 /* ===================================================================
