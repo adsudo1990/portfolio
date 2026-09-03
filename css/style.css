@@ -227,13 +227,23 @@ ul{ margin:0; padding:0; list-style:none; }
   text-align:center;
 }
 @media (max-width: 760px){
-  .hero-split{ grid-template-columns:1fr; justify-items:center; text-align:center; gap:16px; }
-  .hero-split-left, .hero-split-right{ text-align:center; }
+  /* mobile layout replica del moodboard: todo alineado a la izquierda —
+     avatar chico arriba, eyebrow, nombre grande apilado y lugar debajo */
+  .hero-split{ grid-template-columns:1fr; grid-template-rows:none; justify-items:start; text-align:left; gap:10px; }
+  /* en desktop .hero-split-side/.hero-photo usan grid-row:1/span 3 + subgrid para
+     alinear "Sergio" y "Visgarra" en la misma fila; en una sola columna eso hace
+     que el grid abra columnas implícitas y todo quede lado a lado en vez de apilarse */
+  .hero-split-side{ grid-row:auto; grid-template-rows:none; display:block; }
+  .hero-split-side .eyebrow, .hero-split-side .hero-name, .hero-split-side .hero-place{ grid-row:auto; }
+  .hero-split-left, .hero-split-right{ text-align:left; }
+  .hero-name--split{ white-space:normal; }
+  .hero-meta{ text-align:left; margin-left:0; }
+  .hero-cta{ justify-content:flex-start; }
   /* small circular avatar instead of the full rectangular card, matching how
      this layout collapses on mobile in the reference site */
-  .hero-photo{ order:-1; width:96px; aspect-ratio:1/1; border-radius:50%; margin-bottom:4px; }
+  .hero-photo{ grid-row:auto; order:-1; width:64px; aspect-ratio:1/1; border-radius:50%; margin-bottom:4px; align-self:flex-start; }
   .hero-photo-placeholder span{ display:none; }
-  .hero-photo-placeholder svg{ width:28px; height:28px; }
+  .hero-photo-placeholder svg{ width:24px; height:24px; }
 }
 
 /* ===================================================================
