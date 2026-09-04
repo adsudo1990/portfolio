@@ -173,12 +173,22 @@ ul{ margin:0; padding:0; list-style:none; }
 }
 .hero-bg{
   position:absolute; inset:0;
+  z-index:0;
   background:
     radial-gradient(600px 400px at 85% 10%, var(--accent-tint) 0%, transparent 70%),
     repeating-linear-gradient(115deg, var(--hero-line) 0 2px, transparent 2px 34px);
   pointer-events:none;
 }
-.hero-inner{ position:relative; }
+/* campo de partículas interactivo dibujado en canvas por main.js — encima
+   del gradiente de fondo, detrás del contenido (ver .hero-inner) */
+.hero-particles{
+  position:absolute; inset:0;
+  z-index:1;
+  width:100%; height:100%;
+  display:block;
+  pointer-events:none;
+}
+.hero-inner{ position:relative; z-index:2; }
 .hero-name{
   font-family:var(--font-head);
   font-weight:800;
