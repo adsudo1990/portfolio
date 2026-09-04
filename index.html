@@ -2,6 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>
+  /* aplica el tema guardado antes del primer paint (si no, se ve el flash del
+     tema por defecto medio segundo); sin nada guardado se queda en oscuro,
+     que es la identidad original del sitio */
+  try {
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sergio Visgarra — Diseñador Gráfico / Web / UX-UI / 3D</title>
 <meta name="description" content="Portfolio de Sergio Visgarra. Diseño gráfico, web, UX/UI y 3D, con IA generativa en el flujo de trabajo diario. Disponible para nuevos proyectos.">
@@ -9,10 +19,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Crete+Round&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=16">
+<link rel="stylesheet" href="css/style.css?v=17">
 <noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
+
+<!-- ============ THEME TOGGLE ============ -->
+<button id="themeToggle" class="theme-toggle" type="button" aria-label="Cambiar a modo claro">
+  <svg class="icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+</button>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="inicio">
@@ -356,6 +372,17 @@
   </div>
 </section>
 
+<!-- ============ CV DOWNLOAD ============ -->
+<!-- TODO: cuando el PDF técnico esté subido a Drive/Cloudflare, sacar el
+     atributo disabled y agregar href="LINK_REAL" target="_blank" rel="noopener" -->
+<section class="cv-band">
+  <div class="wrap">
+    <p class="cv-band-title">¿Preferís el currículum directo?</p>
+    <p class="cv-band-note">Versión técnica en PDF, con el detalle completo de mi experiencia.</p>
+    <button class="btn btn-cv" type="button" disabled>Descargar CV (PDF) — próximamente</button>
+  </div>
+</section>
+
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="marquee" aria-hidden="true">
@@ -384,6 +411,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="js/main.js?v=14"></script>
+<script src="js/main.js?v=15"></script>
 </body>
 </html>

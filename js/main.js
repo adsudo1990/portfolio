@@ -1,6 +1,27 @@
 // Sergio Visgarra — Portfolio
 document.getElementById('year').textContent = new Date().getFullYear();
 
+/* ---- theme toggle (claro/oscuro) ---- */
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+  const root = document.documentElement;
+  const syncLabel = () => {
+    const isLight = root.getAttribute('data-theme') === 'light';
+    themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+  };
+  syncLabel();
+  themeToggle.addEventListener('click', () => {
+    const goingLight = root.getAttribute('data-theme') !== 'light';
+    if (goingLight) {
+      root.setAttribute('data-theme', 'light');
+    } else {
+      root.removeAttribute('data-theme');
+    }
+    try { localStorage.setItem('theme', goingLight ? 'light' : 'dark'); } catch (e) {}
+    syncLabel();
+  });
+}
+
 /* ---- active dock item on scroll ---- */
 const sections = document.querySelectorAll('section[id], header[id]');
 const dockItems = document.querySelectorAll('.dock-item[data-section]');

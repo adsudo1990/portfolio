@@ -3,7 +3,7 @@
    Design tokens
    =================================================================== */
 :root{
-  /* dark theme */
+  /* dark theme (default — identidad original del sitio) */
   --bg:            #0F1319;
   --bg-alt:        #171C23;
   --surface:       #1C222B;
@@ -16,16 +16,40 @@
   --accent-tint:   rgba(53,220,198,.14);
   --accent-tint-2: rgba(53,220,198,.22);
   --on-accent:     #08211D; /* dark text on top of the bright accent color, for contrast */
+  --shadow:        0 20px 45px -20px rgba(0,0,0,.6);
+  --shadow-sm:     0 10px 25px -12px rgba(0,0,0,.55);
+  --hero-line:     rgba(255,255,255,.04); /* trazo diagonal del fondo del hero */
+  /* --dock-bg y el resto del "chrome" (dock, footer, overlays de imagen) se
+     mantienen siempre oscuros en los dos temas a propósito — es el mismo
+     criterio que usan la mayoría de los sitios con toggle: la barra de
+     navegación no cambia, solo el contenido */
   --dock-bg:       #1B2129;
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
-  --shadow: 0 20px 45px -20px rgba(0,0,0,.6);
-  --shadow-sm: 0 10px 25px -12px rgba(0,0,0,.55);
   --maxw: 1120px;
   --font-head: 'Fira Sans', -apple-system, Segoe UI, sans-serif;
   --font-body: 'Inter', -apple-system, Segoe UI, sans-serif;
   --font-hand: 'Crete Round', Georgia, serif;
+}
+/* ---------- light theme: se activa con [data-theme="light"] en <html>,
+   controlado por el toggle del header (ver .theme-toggle / main.js) ---------- */
+:root[data-theme="light"]{
+  --bg:            #F6F7F5;
+  --bg-alt:        #ECEFEC;
+  --surface:       #FFFFFF;
+  --ink:           #14181C;
+  --ink-soft:      #4E555C;
+  --ink-faint:     #868D94;
+  --line:          #DEE2E4;
+  --accent:        #0B8F7D;
+  --accent-ink:    #0A7A6A;
+  --accent-tint:   rgba(11,143,125,.10);
+  --accent-tint-2: rgba(11,143,125,.16);
+  --on-accent:     #FFFFFF;
+  --shadow:        0 20px 45px -20px rgba(20,24,28,.18);
+  --shadow-sm:     0 10px 25px -12px rgba(20,24,28,.14);
+  --hero-line:     rgba(15,20,25,.05);
 }
 
 *{ box-sizing:border-box; }
@@ -151,7 +175,7 @@ ul{ margin:0; padding:0; list-style:none; }
   position:absolute; inset:0;
   background:
     radial-gradient(600px 400px at 85% 10%, var(--accent-tint) 0%, transparent 70%),
-    repeating-linear-gradient(115deg, rgba(255,255,255,.04) 0 2px, transparent 2px 34px);
+    repeating-linear-gradient(115deg, var(--hero-line) 0 2px, transparent 2px 34px);
   pointer-events:none;
 }
 .hero-inner{ position:relative; }
@@ -246,7 +270,7 @@ ul{ margin:0; padding:0; list-style:none; }
   background:var(--surface);
   border-radius:var(--radius-lg);
   padding:34px 32px;
-  border:1px solid rgba(255,255,255,.08); /* faint stroke so stacked cards read as separate sheets */
+  border:1px solid var(--line); /* faint stroke so stacked cards read as separate sheets */
   /* layered "paper" shadow — visible enough to read depth when cards overlap on scroll */
   box-shadow:
     0 1px 2px rgba(0,0,0,.3),
@@ -674,6 +698,78 @@ ul{ margin:0; padding:0; list-style:none; }
 .dock-item:hover, .dock-item.active{ background:rgba(255,255,255,.1); color:#fff; }
 .dock-item svg{ display:block; }
 .dock-cta{ background:var(--accent); color:var(--on-accent); margin-left:4px; }
+
+/* ===================================================================
+   THEME TOGGLE — pill fija arriba a la derecha, mismo lenguaje visual
+   (glass + blur) que el dock; se queda oscura en los dos temas, igual
+   que el dock, así el "chrome" del sitio no compite con el contenido
+   =================================================================== */
+.theme-toggle{
+  position:fixed;
+  top:24px;
+  right:24px;
+  z-index:101;
+  width:44px;
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(27, 33, 41, .55);
+  backdrop-filter:blur(20px) saturate(1.5);
+  -webkit-backdrop-filter:blur(20px) saturate(1.5);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:999px;
+  color:var(--accent-ink);
+  cursor:pointer;
+  transition:transform .15s ease, background .15s ease;
+}
+.theme-toggle:hover{ background:rgba(27, 33, 41, .75); transform:scale(1.06); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+  .theme-toggle{ background:var(--dock-bg); }
+}
+.theme-toggle svg{ display:block; }
+.theme-toggle .icon-moon{ display:none; }
+:root[data-theme="light"] .theme-toggle .icon-sun{ display:none; }
+:root[data-theme="light"] .theme-toggle .icon-moon{ display:block; }
+@media (max-width: 640px){
+  .theme-toggle{ top:14px; right:14px; width:38px; height:38px; }
+}
+
+/* ===================================================================
+   CV DOWNLOAD — CTA destacada al final del sitio, arriba del footer
+   =================================================================== */
+.cv-band{
+  background:var(--dock-bg);
+  padding:56px 0;
+  text-align:center;
+}
+.cv-band-title{
+  font-family:var(--font-head);
+  font-size:clamp(1.4rem, 3vw, 1.9rem);
+  color:#fff;
+  margin:0 0 10px;
+}
+.cv-band-note{
+  color:rgba(255,255,255,.65);
+  font-size:.92rem;
+  margin:0 0 26px;
+}
+/* fondo del cv-band siempre oscuro (como el dock/footer) sea cual sea el tema,
+   así que el botón no usa los tokens de tema (--ink/--line) sino colores fijos */
+.btn-cv{
+  background:var(--accent);
+  color:var(--on-accent);
+  border-color:transparent;
+}
+.btn-cv:hover{ background:var(--accent-ink); }
+.btn-cv[disabled]{
+  opacity:.45;
+  cursor:not-allowed;
+  border-color:rgba(255,255,255,.2);
+  color:rgba(255,255,255,.7);
+  background:none;
+  transform:none !important;
+}
 .dock-cta:hover{ background:var(--accent-ink); color:var(--on-accent); }
 
 /* ===================================================================
