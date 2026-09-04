@@ -152,6 +152,10 @@ ul{ margin:0; padding:0; list-style:none; }
   cursor:pointer;
   transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
   white-space:nowrap;
+  /* sin esto, un <button disabled> usa el estilo nativo del navegador y
+     pisa el color/fondo — se vuelve invisible en vez de "atenuado" */
+  appearance:none;
+  -webkit-appearance:none;
 }
 .btn:hover{ transform:translateY(-2px); }
 .btn-primary{ background:var(--accent); color:var(--on-accent); box-shadow:var(--shadow-sm); }
@@ -177,15 +181,6 @@ ul{ margin:0; padding:0; list-style:none; }
   background:
     radial-gradient(600px 400px at 85% 10%, var(--accent-tint) 0%, transparent 70%),
     repeating-linear-gradient(115deg, var(--hero-line) 0 2px, transparent 2px 34px);
-  pointer-events:none;
-}
-/* campo de partículas interactivo dibujado en canvas por main.js — encima
-   del gradiente de fondo, detrás del contenido (ver .hero-inner) */
-.hero-particles{
-  position:absolute; inset:0;
-  z-index:1;
-  width:100%; height:100%;
-  display:block;
   pointer-events:none;
 }
 .hero-inner{ position:relative; z-index:2; }
@@ -783,6 +778,62 @@ ul{ margin:0; padding:0; list-style:none; }
 .dock-cta:hover{ background:var(--accent-ink); color:var(--on-accent); }
 
 /* ===================================================================
+   GALAXY BACKGROUND (Three.js) — ver js/galaxy.js
+   La clase .galaxy-active la agrega/saca ese script en <html>, solo cuando
+   Three.js cargó bien, el tema está en oscuro y las animaciones no están
+   apagadas (?motion=off). Sin esa clase el sitio se ve exactamente igual
+   que antes (fondos sólidos normales) — es progresivo, nunca un requisito.
+   =================================================================== */
+#galaxyCanvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  display:block;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+/* un selector por ID le gana en especificidad al [hidden] del navegador
+   (display:none) — mismo caso que .about-more[hidden] más arriba */
+#galaxyCanvas[hidden]{ display:none; }
+.site-content{ position:relative; z-index:1; }
+
+/* con la galaxia activa, el hero y las secciones se vuelven transparentes
+   para dejarla ver como fondo continuo de todo el sitio (el dock, el
+   footer y la franja de CV se quedan siempre sólidos, a propósito) */
+html.galaxy-active .hero,
+html.galaxy-active .section,
+html.galaxy-active .section-alt,
+html.galaxy-active .statement,
+html.galaxy-active .page-header{
+  background:transparent;
+}
+
+/* cada sección (menos el hero, que se queda flotando directo sobre la
+   galaxia, y Skills, que ya tiene sus propias tarjetas con position:sticky
+   — un transform acá arriba rompería ese efecto) se convierte en un panel
+   de vidrio que sube con la animación de js/galaxy.js, como si fuera una
+   tarjeta acercándose — la referencia visual es el crawl de Star Wars */
+html.galaxy-active .section:not(#skills) > .wrap,
+html.galaxy-active .statement > .wrap,
+html.galaxy-active .page-header > .wrap{
+  background:rgba(23, 28, 35, .6);
+  backdrop-filter:blur(18px) saturate(1.3);
+  -webkit-backdrop-filter:blur(18px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--radius-lg);
+  padding:56px clamp(20px, 4vw, 64px);
+  box-shadow:0 40px 70px -30px rgba(0,0,0,.65);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+  html.galaxy-active .section:not(#skills) > .wrap,
+  html.galaxy-active .statement > .wrap,
+  html.galaxy-active .page-header > .wrap{
+    background:rgba(15, 19, 25, .92);
+  }
+}
+
+/* ===================================================================
    RESPONSIVE
    =================================================================== */
 @media (max-width: 900px){
@@ -800,4 +851,10 @@ ul{ margin:0; padding:0; list-style:none; }
   .dock{ left:12px; right:12px; transform:none; width:calc(100% - 24px); justify-content:space-between; overflow-x:auto; }
   .dock-item{ padding:10px 12px; font-size:.72rem; }
   .footer{ padding-bottom:110px; }
+  html.galaxy-active .section:not(#skills) > .wrap,
+  html.galaxy-active .statement > .wrap,
+  html.galaxy-active .page-header > .wrap{
+    padding:36px 20px;
+    border-radius:var(--radius-md);
+  }
 }
