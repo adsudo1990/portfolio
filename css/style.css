@@ -808,7 +808,25 @@ ul{ margin:0; padding:0; list-style:none; }
 /* un selector por ID le gana en especificidad al [hidden] del navegador
    (display:none) — mismo caso que .about-more[hidden] más arriba */
 #galaxyCanvas[hidden]{ display:none; }
-.site-content{ position:relative; z-index:1; }
+/* velo tenue entre la galaxia y el contenido: baja el contraste del fondo
+   sin tener que apagar la galaxia. Va en z-index 1, entre el canvas (0) y
+   el contenido (2) */
+html.galaxy-active body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:1;
+  background:rgba(20, 20, 20, .5); /* #141414 al 50% */
+  pointer-events:none;
+}
+.site-content{ position:relative; z-index:2; }
+
+/* sombra tenue en el texto: lo despega del campo de partículas y mejora la
+   legibilidad general. Los botones y el dock quedan sin sombra, ahí el texto
+   ya va sobre un fondo sólido y la sombra los ensuciaba */
+html.galaxy-active .site-content{ text-shadow:0 1px 3px rgba(0,0,0,.55); }
+html.galaxy-active .btn,
+html.galaxy-active .dock{ text-shadow:none; }
 
 /* con la galaxia activa, el hero y las secciones se vuelven transparentes
    para dejarla ver como fondo continuo de todo el sitio (el dock, el
