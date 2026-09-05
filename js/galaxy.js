@@ -95,17 +95,73 @@
   galaxy.rotation.x = 0.35;
   scene.add(galaxy);
 
-  /* ---- estrellas dispersas detrás de la galaxia, para dar profundidad ---- */
-  const starCount = 800;
-  const starGeometry = new THREE.BufferGeometry();
-  const starPositions = new Float32Array(starCount * 3);
-  for (let i = 0; i < starCount * 3; i++) starPositions[i] = (Math.random() - 0.5) * 40;
-  starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-  const stars = new THREE.Points(
-    starGeometry,
-    new THREE.PointsMaterial({ size: 0.02, color: 0xffffff, transparent: true, opacity: 0.5, depthWrite: false })
-  );
-  scene.add(stars);
+  /* ---- textura de punto redondo: sin esto, los Points de Three.js se dibujan
+     como cuadrados, y las estrellas que quedan cerca de la cámara se ven como
+     bloques grises en vez de estrellas ---- */
+  function makeDotTexture() {
+    const size = 64;
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const cx = c.getContext('2d');
+    const grad = cx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.35, 'rgba(255,255,255,.85)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    cx.fillStyle = grad;
+    cx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(c);
+  }
+  const dotTexture = makeDotTexture();
+
+  /* ---- estrellas de fondo en dos capas: una lejana, muy tenue y numerosa,
+     y otra un poco más cerca y más marcada. Las dos giran a distinta
+     velocidad, así el fondo tiene algo de parallax en vez de un plano único.
+     Se distribuyen en un cascarón esférico (no en un cubo lleno) para que
+     ninguna caiga encima de la cámara y se dibuje gigante ---- */
+  function makeStarfield({ count, rMin, rMax, size, opacity }) {
+    const geom = new THREE.BufferGeometry();
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      // dirección uniforme sobre la esfera + radio dentro del cascarón
+      const u = Math.random() * 2 - 1;
+      const theta = Math.random() * Math.PI * 2;
+      const s = Math.sqrt(1 - u * u);
+      const r = rMin + Math.random() * (rMax - rMin);
+      pos[i * 3] = s * Math.cos(theta) * r;
+      pos[i * 3 + 1] = u * r;
+      pos[i * 3 + 2] = s * Math.sin(theta) * r;
+    }
+    geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const points = new THREE.Points(
+      geom,
+      new THREE.PointsMaterial({
+        map: dotTexture,
+        // sin atenuación por distancia: `size` pasa a ser el tamaño en píxeles,
+        // que es lo que se quiere para un fondo de estrellas (todas parejas,
+        // sin achicarse por estar lejos). Se escala por el pixel ratio para que
+        // se vean iguales en pantallas normales y retina
+        sizeAttenuation: false,
+        size: size * renderer.getPixelRatio(),
+        color: 0xffffff,
+        transparent: true,
+        opacity,
+        depthWrite: false,
+      })
+    );
+    scene.add(points);
+    return points;
+  }
+  // tamaños en px (CSS) y opacidades calibradas contando con que encima va el
+  // velo (#141414 al 50%) y el blur del canvas, que se comen buena parte.
+  // rMin > posición de la cámara (z=9 arriba de todo) para que ninguna estrella
+  // quede pegada al lente.
+  const STAR_SIZE_FAR = 2.6;
+  const STAR_SIZE_NEAR = 4.4;
+  // en pantallas angostas el mismo tamaño en px ocupa mucha más proporción de
+  // pantalla, así que se achica para que el fondo se vea igual de fino
+  const starSizeFactor = () => Math.min(1, Math.max(0.55, window.innerWidth / 1200));
+  const starsFar = makeStarfield({ count: 3200, rMin: 18, rMax: 30, size: STAR_SIZE_FAR * starSizeFactor(), opacity: 0.6 });
+  const starsNear = makeStarfield({ count: 1100, rMin: 12, rMax: 18, size: STAR_SIZE_NEAR * starSizeFactor(), opacity: 0.85 });
 
   /* ---- nubes: sprites grandes y tenues con una textura radial generada en
      canvas (sin archivos externos), para dar densidad atmosférica detrás y
@@ -126,20 +182,26 @@
   const cloudTexture = makeCloudTexture();
   const cloudColors = [0x35dcc6, 0x2a3a7a, 0x8ff3e4];
   const clouds = [];
-  const CLOUD_COUNT = 7;
+  // Las nubes son sprites grandes con blending aditivo: lo que cuesta es el
+  // relleno (mucho pixel pintado por frame), no la cantidad de objetos. En
+  // pantallas chicas se bajan a la mitad — es donde menos margen de GPU hay y
+  // donde menos se lucen, porque entran menos en cuadro.
+  const CLOUD_COUNT = window.innerWidth < 700 ? 8 : 16;
   for (let i = 0; i < CLOUD_COUNT; i++) {
     const cloudMat = new THREE.SpriteMaterial({
       map: cloudTexture,
       color: cloudColors[i % cloudColors.length],
       transparent: true,
-      opacity: 0.05 + Math.random() * 0.06,
+      // más nubes pero cada una más tenue: la densidad la da la suma, no una
+      // sola mancha fuerte (blending aditivo, se acumulan solas)
+      opacity: 0.035 + Math.random() * 0.05,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
     const sprite = new THREE.Sprite(cloudMat);
-    const scale = 5 + Math.random() * 5;
+    const scale = 4 + Math.random() * 7;
     sprite.scale.set(scale, scale, 1);
-    sprite.position.set((Math.random() - 0.5) * 14, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 12 - 3);
+    sprite.position.set((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 9, (Math.random() - 0.5) * 16 - 3);
     sprite.material.rotation = Math.random() * Math.PI;
     scene.add(sprite);
     clouds.push({ sprite, drift: (Math.random() - 0.5) * 0.015 });
@@ -149,7 +211,7 @@
      y se apagan. Cabeza brillante (Points) + cola (Line), las dos en cyan
      con blending aditivo para que "brillen" sobre el fondo oscuro ---- */
   const SHOOTING_STAR_COLOR = new THREE.Color('#7DFFF0');
-  const SHOOTING_STAR_COUNT = 2;
+  const SHOOTING_STAR_COUNT = 3;
   const shootingStars = [];
   for (let i = 0; i < SHOOTING_STAR_COUNT; i++) {
     const trailGeom = new THREE.BufferGeometry();
@@ -166,8 +228,9 @@
     const headGeom = new THREE.BufferGeometry();
     headGeom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3), 3));
     const headMat = new THREE.PointsMaterial({
+      map: dotTexture,
       color: SHOOTING_STAR_COLOR,
-      size: 0.4,
+      size: 0.45,
       transparent: true,
       opacity: 0,
       sizeAttenuation: true,
@@ -186,7 +249,7 @@
       start: new THREE.Vector3(),
       dir: new THREE.Vector3(),
       // arrancan escalonadas para que no salgan las dos juntas al toque
-      cooldown: 3 + i * 3 + Math.random() * 4,
+      cooldown: 0.8 + i * 1.2 + Math.random() * 1.5,
     });
   }
   function fireShootingStar(s) {
@@ -218,7 +281,7 @@
       s.active = false;
       s.trail.material.opacity = 0;
       s.head.material.opacity = 0;
-      s.cooldown = 6 + Math.random() * 10; // otra pasa recién en 6-16s
+      s.cooldown = 1.5 + Math.random() * 4; // con 3 estrellas, pasa una cada ~1-2s
     }
   }
 
@@ -232,6 +295,11 @@
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    // el tamaño de las estrellas está en px, así que hay que recalcularlo al
+    // cambiar de ancho (o al rotar el teléfono)
+    const f = starSizeFactor() * renderer.getPixelRatio();
+    starsFar.material.size = STAR_SIZE_FAR * f;
+    starsNear.material.size = STAR_SIZE_NEAR * f;
   }
   window.addEventListener('resize', resize);
 
@@ -248,7 +316,8 @@
     const delta = Math.min(clock.getDelta(), 0.1);
     elapsedTotal += delta;
     galaxy.rotation.y = elapsedTotal * 0.035;
-    stars.rotation.y = elapsedTotal * 0.008;
+    starsFar.rotation.y = elapsedTotal * 0.005;
+    starsNear.rotation.y = elapsedTotal * 0.012;
     clouds.forEach((c) => { c.sprite.material.rotation += c.drift * delta; });
     shootingStars.forEach((s) => updateShootingStar(s, delta));
 
