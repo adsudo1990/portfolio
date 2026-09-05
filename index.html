@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Crete+Round&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=25">
+<link rel="stylesheet" href="css/style.css?v=26">
 <noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
@@ -40,9 +40,20 @@
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap hero-inner reveal-group">
     <div class="hero-split reveal-group">
-      <p class="eyebrow reveal">Diseñador Digital</p>
-      <h1 class="hero-name reveal">Sergio</h1>
-      <h1 class="hero-name reveal">Visgarra</h1>
+      <p class="eyebrow reveal hero-eyebrow">Diseñador Digital</p>
+      <h1 class="hero-name hero-name--first reveal">Sergio</h1>
+
+      <!-- PENDIENTE: cuando Sergio pase la foto, guardarla en
+           assets/img/sergio.jpg y reemplazar el div .hero-photo-placeholder por:
+           <img src="assets/img/sergio.jpg" alt="Retrato de Sergio Visgarra"> -->
+      <div class="hero-photo reveal">
+        <div class="hero-photo-placeholder">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Foto</span>
+        </div>
+      </div>
+
+      <h1 class="hero-name hero-name--last reveal">Visgarra</h1>
       <p class="hero-place reveal">Buenos Aires, Argentina</p>
     </div>
     <p class="hero-meta reveal">Disponibilidad inmediata, modalidad híbrida <span class="accent-text">(abierto a 100% remoto)</span></p>
