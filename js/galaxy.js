@@ -41,11 +41,14 @@
      colores realistas ---- */
   const g = {
     count: 13000,
+    // lo bastante grandes para sobrevivir al blur del CSS, pero no tanto que
+    // al acercarse la cámara se vean como bloques en vez de puntos
     size: 0.028,
-    radius: 5.2,
+    // radio chico = galaxia compacta, que entra entera en cuadro desde arriba
+    radius: 3.6,
     branches: 4,
-    spin: 1.1,
-    randomness: 0.45,
+    spin: 1.3,
+    randomness: 0.35,
     randomnessPower: 3,
     insideColor: new THREE.Color('#8FF3E4'),
     outsideColor: new THREE.Color('#1B2A63'),
@@ -119,6 +122,8 @@
 
   let raf = null;
   let targetZ = camera.position.z;
+  let lastBlur = null;
+  const MAX_BLUR = 2.5; // en px, igual al valor por defecto del CSS
   const clock = new THREE.Clock();
 
   function tick() {
@@ -128,10 +133,20 @@
 
     // acercamiento progresivo a la galaxia a medida que se scrollea toda la página
     const p = scrollProgress();
-    targetZ = 9 - p * 6.4; // de z=9 (lejos, en el Hero) a z=2.6 (cerca del centro, al final)
+    // de z=9 (lejos, en el Hero) a z=4.2 (cerca, pero sin meterse dentro del
+    // disco: más cerca que eso las partículas se ven como bloques)
+    targetZ = 9 - p * 4.8;
     camera.position.z += (targetZ - camera.position.z) * 0.06;
     camera.position.y = 0.6 - p * 0.3;
     camera.lookAt(0, 0, 0);
+
+    // el desenfoque se va despejando con el zoom: arriba la galaxia es una
+    // mancha en segundo plano, abajo se ve que está hecha de partículas
+    const blur = Math.round(MAX_BLUR * (1 - p) * 10) / 10;
+    if (blur !== lastBlur) {
+      canvas.style.filter = blur > 0.05 ? `blur(${blur}px)` : 'none';
+      lastBlur = blur;
+    }
 
     renderer.render(scene, camera);
     raf = requestAnimationFrame(tick);

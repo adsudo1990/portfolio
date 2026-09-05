@@ -134,15 +134,14 @@ if (animationsEnabled && flipCard && skillsGrid) {
 
 /* ===================================================================
    STATEMENT — words light up one by one as you scroll through the line
+   (se aplica a todo .word-reveal, hay más de una frase con este efecto)
    =================================================================== */
-const statementText = document.getElementById('statementText');
-if (statementText && animationsEnabled) {
+document.querySelectorAll('.word-reveal').forEach((textEl) => {
+  if (!animationsEnabled) return;
   // wrap every word in its own span (keeps the HTML clean and the text selectable)
-  const words = statementText.textContent.trim().split(/\s+/);
-  statementText.innerHTML = words
-    .map((w) => `<span class="word">${w}</span>`)
-    .join(' ');
-  const wordEls = statementText.querySelectorAll('.word');
+  const words = textEl.textContent.trim().split(/\s+/);
+  textEl.innerHTML = words.map((w) => `<span class="word">${w}</span>`).join(' ');
+  const wordEls = textEl.querySelectorAll('.word');
 
   if (hasGsap) {
     gsap.to(wordEls, {
@@ -150,11 +149,11 @@ if (statementText && animationsEnabled) {
       ease: 'none',
       stagger: 1,
       scrollTrigger: {
-        trigger: statementText,
+        trigger: textEl,
         start: 'top 80%',
         // rango explícito con mínimo garantizado: con 'bottom 55%' se achicaba
         // demasiado (o se invertía) en ventanas bajas
-        end: () => '+=' + Math.max(420, statementText.offsetHeight + window.innerHeight * 0.2),
+        end: () => '+=' + Math.max(420, textEl.offsetHeight + window.innerHeight * 0.2),
         scrub: 0.25,
         invalidateOnRefresh: true,
       },
@@ -163,9 +162,9 @@ if (statementText && animationsEnabled) {
     let ticking = false;
     const render = () => {
       ticking = false;
-      const rect = statementText.getBoundingClientRect();
+      const rect = textEl.getBoundingClientRect();
       const vh = window.innerHeight;
-      const span = Math.max(420, statementText.offsetHeight + vh * 0.2);
+      const span = Math.max(420, textEl.offsetHeight + vh * 0.2);
       const progress = clamp01((vh * 0.8 - rect.top) / span);
       const lit = progress * wordEls.length;
       wordEls.forEach((el, i) => {
@@ -179,7 +178,7 @@ if (statementText && animationsEnabled) {
     window.addEventListener('resize', onScroll);
     render();
   }
-}
+});
 
 /* NOTA: el desenfoque de los títulos de sección se quitó a pedido —
    el único blur que queda es el del dock, hecho en CSS con backdrop-filter. */
