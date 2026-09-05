@@ -107,6 +107,121 @@
   );
   scene.add(stars);
 
+  /* ---- nubes: sprites grandes y tenues con una textura radial generada en
+     canvas (sin archivos externos), para dar densidad atmosférica detrás y
+     alrededor de la galaxia ---- */
+  function makeCloudTexture() {
+    const size = 256;
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const cx = c.getContext('2d');
+    const grad = cx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    grad.addColorStop(0, 'rgba(255,255,255,.9)');
+    grad.addColorStop(0.4, 'rgba(255,255,255,.35)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    cx.fillStyle = grad;
+    cx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(c);
+  }
+  const cloudTexture = makeCloudTexture();
+  const cloudColors = [0x35dcc6, 0x2a3a7a, 0x8ff3e4];
+  const clouds = [];
+  const CLOUD_COUNT = 7;
+  for (let i = 0; i < CLOUD_COUNT; i++) {
+    const cloudMat = new THREE.SpriteMaterial({
+      map: cloudTexture,
+      color: cloudColors[i % cloudColors.length],
+      transparent: true,
+      opacity: 0.05 + Math.random() * 0.06,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const sprite = new THREE.Sprite(cloudMat);
+    const scale = 5 + Math.random() * 5;
+    sprite.scale.set(scale, scale, 1);
+    sprite.position.set((Math.random() - 0.5) * 14, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 12 - 3);
+    sprite.material.rotation = Math.random() * Math.PI;
+    scene.add(sprite);
+    clouds.push({ sprite, drift: (Math.random() - 0.5) * 0.015 });
+  }
+
+  /* ---- estrellas fugaces: aparecen de a una cada tanto, cruzan el cuadro
+     y se apagan. Cabeza brillante (Points) + cola (Line), las dos en cyan
+     con blending aditivo para que "brillen" sobre el fondo oscuro ---- */
+  const SHOOTING_STAR_COLOR = new THREE.Color('#7DFFF0');
+  const SHOOTING_STAR_COUNT = 2;
+  const shootingStars = [];
+  for (let i = 0; i < SHOOTING_STAR_COUNT; i++) {
+    const trailGeom = new THREE.BufferGeometry();
+    trailGeom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3));
+    const trailMat = new THREE.LineBasicMaterial({
+      color: SHOOTING_STAR_COLOR,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const trail = new THREE.Line(trailGeom, trailMat);
+
+    const headGeom = new THREE.BufferGeometry();
+    headGeom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3), 3));
+    const headMat = new THREE.PointsMaterial({
+      color: SHOOTING_STAR_COLOR,
+      size: 0.4,
+      transparent: true,
+      opacity: 0,
+      sizeAttenuation: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const head = new THREE.Points(headGeom, headMat);
+
+    scene.add(trail, head);
+    shootingStars.push({
+      trail,
+      head,
+      active: false,
+      t: 0,
+      duration: 1,
+      start: new THREE.Vector3(),
+      dir: new THREE.Vector3(),
+      // arrancan escalonadas para que no salgan las dos juntas al toque
+      cooldown: 3 + i * 3 + Math.random() * 4,
+    });
+  }
+  function fireShootingStar(s) {
+    s.start.set((Math.random() - 0.5) * 10, 2.5 + Math.random() * 2, (Math.random() - 0.5) * 6 - 1);
+    s.dir.set(-1 - Math.random() * 0.6, -0.35 - Math.random() * 0.3, (Math.random() - 0.5) * 0.4).normalize();
+    s.duration = 0.9 + Math.random() * 0.6;
+    s.t = 0;
+    s.active = true;
+  }
+  function updateShootingStar(s, delta) {
+    if (!s.active) {
+      s.cooldown -= delta;
+      if (s.cooldown <= 0) fireShootingStar(s);
+      return;
+    }
+    s.t += delta;
+    const progress = clamp01(s.t / s.duration);
+    const speed = 9;
+    const headPos = s.start.clone().addScaledVector(s.dir, progress * s.duration * speed);
+    const tailPos = headPos.clone().addScaledVector(s.dir, -1.4);
+    const fade = Math.sin(progress * Math.PI); // sube y baja: aparece y se apaga
+    s.trail.geometry.attributes.position.set([tailPos.x, tailPos.y, tailPos.z, headPos.x, headPos.y, headPos.z]);
+    s.trail.geometry.attributes.position.needsUpdate = true;
+    s.trail.material.opacity = fade * 0.8;
+    s.head.geometry.attributes.position.set([headPos.x, headPos.y, headPos.z]);
+    s.head.geometry.attributes.position.needsUpdate = true;
+    s.head.material.opacity = fade;
+    if (progress >= 1) {
+      s.active = false;
+      s.trail.material.opacity = 0;
+      s.head.material.opacity = 0;
+      s.cooldown = 6 + Math.random() * 10; // otra pasa recién en 6-16s
+    }
+  }
+
   /* ---- scroll: progreso 0→1 de toda la página, no solo del hero ---- */
   function scrollProgress() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -125,11 +240,17 @@
   let lastBlur = null;
   const MAX_BLUR = 2.5; // en px, igual al valor por defecto del CSS
   const clock = new THREE.Clock();
+  let elapsedTotal = 0;
 
   function tick() {
-    const elapsed = clock.getElapsedTime();
-    galaxy.rotation.y = elapsed * 0.035;
-    stars.rotation.y = elapsed * 0.008;
+    // un solo getDelta() por frame: getElapsedTime() lo llama internamente
+    // adentro, así que pedir los dos por separado devuelve un delta pisado
+    const delta = Math.min(clock.getDelta(), 0.1);
+    elapsedTotal += delta;
+    galaxy.rotation.y = elapsedTotal * 0.035;
+    stars.rotation.y = elapsedTotal * 0.008;
+    clouds.forEach((c) => { c.sprite.material.rotation += c.drift * delta; });
+    shootingStars.forEach((s) => updateShootingStar(s, delta));
 
     // acercamiento progresivo a la galaxia a medida que se scrollea toda la página
     const p = scrollProgress();
