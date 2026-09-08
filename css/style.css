@@ -98,7 +98,7 @@ ul{ margin:0; padding:0; list-style:none; }
   margin:0 0 40px;
 }
 
-.section{ padding:96px 0; }
+.section{ padding:84px 0; } /* 96px - 12% */
 .section-alt{ background:var(--bg-alt); }
 
 .section-head{
@@ -171,7 +171,7 @@ ul{ margin:0; padding:0; list-style:none; }
    =================================================================== */
 .hero{
   position:relative;
-  padding:150px 0 110px;
+  padding:132px 0 97px; /* 150px/110px - 12% */
   overflow:hidden;
   background:var(--bg);
 }
@@ -263,8 +263,8 @@ ul{ margin:0; padding:0; list-style:none; }
     grid-row:1 / span 3;
     order:0;
     width:clamp(112px, 12vw, 168px);
-    aspect-ratio:3/4;
-    border-radius:var(--radius-md);
+    aspect-ratio:1/1;
+    border-radius:50%;
     margin-bottom:0;
     align-self:center;
     box-shadow:var(--shadow);
@@ -498,10 +498,10 @@ ul{ margin:0; padding:0; list-style:none; }
 /* ===================================================================
    STATEMENT — big line that fills in word by word as you scroll
    =================================================================== */
-.statement{ padding:18vh 0; background:var(--bg); }
+.statement{ padding:15.8vh 0; background:var(--bg); } /* 18vh - 12% */
 /* cierre antes de la franja del CV: más corto que el statement de arriba
    para no repetir el mismo respiro dos veces en la misma bajada */
-.statement--cta{ padding:12vh 0; }
+.statement--cta{ padding:10.6vh 0; } /* 12vh - 12% */
 .statement--cta .statement-text{ text-align:center; margin:0 auto; }
 .statement-text{
   font-family:var(--font-head);
@@ -520,7 +520,7 @@ ul{ margin:0; padding:0; list-style:none; }
   will-change:opacity;
 }
 @media (max-width: 640px){
-  .statement{ padding:12vh 0; }
+  .statement{ padding:10.6vh 0; } /* 12vh - 12% */
 }
 
 /* ===================================================================
@@ -1015,8 +1015,8 @@ html.galaxy-active .statement-text{
   .grid-cards{ grid-template-columns:1fr 1fr; }
 }
 @media (max-width: 640px){
-  .section{ padding:64px 0; }
-  .hero{ padding:120px 0 90px; }
+  .section{ padding:56px 0; } /* 64px - 12% */
+  .hero{ padding:106px 0 79px; } /* 120px/90px - 12% */
   .wrap{ padding:0 20px; }
   .grid-cards{ grid-template-columns:1fr; }
   .dock{ left:12px; right:12px; transform:none; width:calc(100% - 24px); justify-content:space-between; overflow-x:auto; }
