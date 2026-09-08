@@ -435,7 +435,13 @@ ul{ margin:0; padding:0; list-style:none; }
   line-height:1.1;
   color:var(--on-accent);
 }
-.skills-visual-back-text em{ font-style:normal; opacity:.65; }
+/* mismo mecanismo que .statement-text: cada palabra arranca apagada y se
+   enciende con el scroll (main.js envuelve todo .word-reveal en spans) */
+.skills-visual-back-text .word{
+  opacity:.35;
+  transition:opacity .2s linear;
+  will-change:opacity;
+}
 .skills-visual-back-arrow{
   width:44px; height:44px;
   border-radius:50%;
@@ -891,11 +897,13 @@ html.galaxy-active body::after{
 .site-content{ position:relative; z-index:2; }
 
 /* sombra tenue en el texto: lo despega del campo de partículas y mejora la
-   legibilidad general. Los botones y el dock quedan sin sombra, ahí el texto
-   ya va sobre un fondo sólido y la sombra los ensuciaba */
+   legibilidad general. Los botones, el dock y el reverso de la tarjeta de
+   Skills quedan sin sombra — ahí el texto ya va sobre un fondo sólido de
+   color (no sobre el campo de partículas) y la sombra los ensuciaba */
 html.galaxy-active .site-content{ text-shadow:0 1px 3px rgba(0,0,0,.55); }
 html.galaxy-active .btn,
-html.galaxy-active .dock{ text-shadow:none; }
+html.galaxy-active .dock,
+html.galaxy-active .skills-visual-back-text{ text-shadow:none; }
 
 /* con la galaxia activa, el hero y las secciones se vuelven transparentes
    para dejarla ver como fondo continuo de todo el sitio (el dock, el

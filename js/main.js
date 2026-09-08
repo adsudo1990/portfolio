@@ -83,6 +83,21 @@ const cardFront = document.querySelector('.skills-visual-front');
 const cardBack = document.querySelector('.skills-visual-back');
 if (!flipIn3D && flipCard) flipCard.classList.add('is-flat'); // cross-fade faces instead of rotating
 
+/* "Trabajemos juntos" se arma palabra por palabra igual que .word-reveal,
+   pero A MANO: el genérico dispara según la posición del elemento en el
+   documento, y esta tarjeta es position:sticky (se queda pegada arriba
+   toda la sección) — con eso, el trigger genérico se cumplía casi al
+   instante y la frase ya estaba completa mucho antes de que el giro 3D
+   llegara a mostrar el dorso. Acá se sincroniza con el mismo scroll que
+   mueve el giro (ver flipST más abajo), para que se arme *mientras* se ve. */
+const backText = document.querySelector('.skills-visual-back-text');
+let backWords = [];
+if (backText) {
+  const words = backText.textContent.trim().split(/\s+/);
+  backText.innerHTML = words.map((w) => `<span class="word">${w}</span>`).join(' ');
+  backWords = backText.querySelectorAll('.word');
+}
+
 /* ---- the card turns over to "Trabajemos juntos" ----
    (antes esto vivía junto con el traspaso de la foto del hero, que se sacó al
    sacar la foto del hero; el giro de la tarjeta queda como efecto independiente).
@@ -100,6 +115,9 @@ if (animationsEnabled && flipCard && skillsGrid) {
     };
     if (flipIn3D) {
       gsap.fromTo(flipCard, { rotateY: 0 }, { rotateY: 180, ease: 'none', scrollTrigger: flipST });
+      if (backWords.length) {
+        gsap.fromTo(backWords, { opacity: 0.35 }, { opacity: 1, stagger: 0.5, ease: 'none', scrollTrigger: flipST });
+      }
     } else if (cardFront && cardBack) {
       gsap.timeline({ scrollTrigger: flipST })
         .fromTo(cardFront, { opacity: 1 }, { opacity: 0, ease: 'none' }, 0)
@@ -118,6 +136,10 @@ if (animationsEnabled && flipCard && skillsGrid) {
       const flip = clamp01(-gridRect.top / scrollable);
       if (flipIn3D) {
         flipCard.style.transform = `rotateY(${flip * 180}deg)`;
+        backWords.forEach((el, i) => {
+          const t = clamp01(flip * backWords.length - i);
+          el.style.opacity = String(0.35 + t * 0.65);
+        });
       } else if (cardFront && cardBack) {
         cardFront.style.opacity = String(1 - flip);
         cardBack.style.opacity = String(flip);
