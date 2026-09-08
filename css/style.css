@@ -1008,8 +1008,11 @@ html.galaxy-active .statement-text{
    RESPONSIVE
    =================================================================== */
 @media (max-width: 900px){
-  .about-grid{ grid-template-columns:1fr; gap:32px; }
-  .about-media{ order:-1; }
+  .about-grid{ grid-template-columns:1fr; gap:24px; }
+  /* en una sola columna, el reel a 9:16 y 240px de ancho quedaba de 427px de
+     alto — más de media pantalla en mobile — y eso era lo que hacía falta
+     scrollear de más para llegar a Portfolio. Más chico y menos vertical */
+  .about-media{ order:-1; max-width:180px; aspect-ratio:3/4; }
   .threed-grid, .contact-grid{ grid-template-columns:1fr; }
   .featured-grid{ grid-template-columns:1fr; }
   .grid-cards{ grid-template-columns:1fr 1fr; }

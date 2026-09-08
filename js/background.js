@@ -235,13 +235,19 @@
     attributeFilter: ['data-theme'],
   });
 
-  /* ---- cada sección sube como un panel con tilt 3D al entrar en vista
-     (Skills queda afuera: su tarjeta con position:sticky se rompería si el
-     contenedor padre recibe un transform) ---- */
+  /* ---- cada sección sube como un panel con tilt 3D al entrar en vista.
+     Quedan afuera:
+     - Skills: su tarjeta con position:sticky se rompería si el contenedor
+       padre recibe un transform
+     - Portfolio: en mobile es una sola columna con las 15 tarjetas de
+       proyectos apiladas (~3000px de alto, contra ~600-1000px del resto).
+       rotateX(20deg) sobre un panel tan alto desplaza su borde superior
+       más de 1000px durante el scrub inicial — eso era el "hay que
+       scrollear de más para llegar a Portfolio" ---- */
   function initCardReveals() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     const cards = document.querySelectorAll(
-      '.section:not(#skills) > .wrap, .statement > .wrap, .page-header > .wrap'
+      '.section:not(#skills):not(#portfolio) > .wrap, .statement > .wrap, .page-header > .wrap'
     );
     cards.forEach((card) => {
       card.parentElement.style.perspective = '1200px';
