@@ -63,8 +63,10 @@
   /* ---- malla de puntos: grilla plana en XZ, cada punto se levanta en Y
      según una suma de senoidales (da el patrón de olas/crestas de la
      referencia sin necesitar una librería de ruido aparte) ---- */
-  const GRID_COLS = 110;
-  const GRID_ROWS = 70;
+  // +30% de partículas (125x89 ≈ 110x70 * 1.3) — el juego con el mouse se
+  // luce más con una malla más densa
+  const GRID_COLS = 125;
+  const GRID_ROWS = 89;
   const GRID_W = 34; // ancho total en unidades de mundo
   const GRID_D = 46; // profundidad: se extiende hacia -Z, lejos de cámara
   const count = GRID_COLS * GRID_ROWS;
@@ -107,7 +109,7 @@
   const deepColor = new THREE.Color('#0c1a2e');
   const midColor = new THREE.Color('#35dcc6');
   const peakColor = new THREE.Color('#c8fff6');
-  const AMPLITUDE = 2; // suma máxima aproximada de las 3 senoidales de abajo
+  const AMPLITUDE = 1.5; // suma máxima aproximada de las 3 senoidales de abajo (bajó junto con el movimiento, más leve)
 
   /* ---- dispersión con el mouse: raycast contra el plano y=0 para saber en
      qué punto del "piso" está apuntando el cursor, y apartar las partículas
@@ -170,9 +172,9 @@
       const x = basePos[i * 2];
       const z = basePos[i * 2 + 1];
       const h =
-        Math.sin(x * 0.35 + t * 0.6) * 0.95 +
-        Math.sin(z * 0.22 - t * 0.8) * 0.7 +
-        Math.sin((x + z) * 0.16 + t * 0.35) * 0.35;
+        Math.sin(x * 0.35 + t * 0.42) * 0.7 +
+        Math.sin(z * 0.22 - t * 0.55) * 0.5 +
+        Math.sin((x + z) * 0.16 + t * 0.25) * 0.25;
 
       let px = x;
       let pz = z;
