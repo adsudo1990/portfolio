@@ -245,3 +245,56 @@ if (form) {
       `mailto:sergio_visgarra@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 }
+
+/* ---- modal de proyectos: las tarjetas con data-process abren un modal con
+   el detalle de cómo se hizo, en vez de navegar directo al link externo.
+   Las que no tienen ese atributo (los links de "GitHub ↗" / "Behance ↗" de
+   arriba de cada sección, o los slots de reel) siguen su comportamiento normal ---- */
+const projectModal = document.getElementById('projectModal');
+if (projectModal) {
+  const modalImg = document.getElementById('projectModalImg');
+  const modalTag = document.getElementById('projectModalTag');
+  const modalTitle = document.getElementById('projectModalTitle');
+  const modalDesc = document.getElementById('projectModalDesc');
+  const modalLink = document.getElementById('projectModalLink');
+  let lastFocused = null;
+
+  const openModal = (card) => {
+    const img = card.querySelector('img');
+    const heading = card.querySelector('h3, h4');
+    const tag = card.querySelector('.skill-tag');
+
+    if (img) { modalImg.src = img.src; modalImg.alt = img.alt || ''; modalImg.closest('.project-modal-img').hidden = false; }
+    else { modalImg.closest('.project-modal-img').hidden = true; }
+
+    modalTag.hidden = !tag;
+    if (tag) modalTag.textContent = tag.textContent;
+    modalTitle.textContent = heading ? heading.textContent : '';
+    modalDesc.textContent = card.dataset.process;
+    modalLink.href = card.href;
+
+    lastFocused = document.activeElement;
+    projectModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    projectModal.querySelector('.project-modal-close').focus();
+  };
+
+  const closeModal = () => {
+    projectModal.hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  };
+
+  document.querySelectorAll('.featured-card[data-process], .grid-card[data-process]').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(card);
+    });
+  });
+  projectModal.addEventListener('click', (e) => {
+    if (e.target.closest('[data-modal-close]')) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !projectModal.hidden) closeModal();
+  });
+}

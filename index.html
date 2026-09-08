@@ -15,16 +15,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sergio Visgarra — Diseñador Gráfico / Web / UX-UI / 3D</title>
 <meta name="description" content="Portfolio de Sergio Visgarra. Diseño gráfico, web, UX/UI y 3D, con IA generativa en el flujo de trabajo diario. Disponible para nuevos proyectos.">
-<link rel="icon" href="data:,">
+<link rel="canonical" href="https://adsudo1990.github.io/portfolio/">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<!-- Open Graph / Twitter Card: la vista previa que se arma al mandar el link
+     por WhatsApp, LinkedIn, etc. La imagen es assets/img/og-cover.png,
+     1200x630, generada con el mismo look del hero. -->
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Sergio Visgarra — Portfolio">
+<meta property="og:title" content="Sergio Visgarra — Diseñador Digital">
+<meta property="og:description" content="Diseño gráfico, web, UX/UI y 3D, con IA generativa en el flujo de trabajo diario. Disponible para nuevos proyectos.">
+<meta property="og:image" content="https://adsudo1990.github.io/portfolio/assets/img/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://adsudo1990.github.io/portfolio/">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sergio Visgarra — Diseñador Digital">
+<meta name="twitter:description" content="Diseño gráfico, web, UX/UI y 3D, con IA generativa en el flujo de trabajo diario.">
+<meta name="twitter:image" content="https://adsudo1990.github.io/portfolio/assets/img/og-cover.png">
+
+<!-- Schema.org: le da a Google/LinkedIn/buscadores con IA una lectura
+     estructurada de quién es Sergio, no solo texto suelto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sergio Visgarra",
+  "jobTitle": "Diseñador Digital",
+  "url": "https://adsudo1990.github.io/portfolio/",
+  "image": "https://adsudo1990.github.io/portfolio/assets/img/og-cover.png",
+  "address": { "@type": "PostalAddress", "addressLocality": "Buenos Aires", "addressCountry": "AR" },
+  "email": "mailto:sergio_visgarra@hotmail.com",
+  "sameAs": [
+    "https://ar.linkedin.com/in/sergio-visgarra",
+    "https://github.com/adsudo1990",
+    "https://www.behance.net/svdgw"
+  ],
+  "knowsAbout": ["Diseño Gráfico", "Diseño Web", "UX/UI", "Motion", "3D", "IA Generativa"]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Crete+Round&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=26">
+<link rel="stylesheet" href="css/style.css?v=28">
 <noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
 
-<!-- ============ GALAXY BACKGROUND (Three.js, ver js/galaxy.js) ============ -->
+<!-- ============ FONDO 3D (Three.js, ver js/background.js) ============ -->
 <canvas id="galaxyCanvas" aria-hidden="true"></canvas>
 
 <div class="site-content">
@@ -60,6 +99,10 @@
     <div class="hero-cta reveal">
       <a href="#portfolio" class="btn btn-primary">Ver portfolio</a>
       <a href="#contacto" class="btn btn-outline">Contactar</a>
+      <!-- TODO: mismo pendiente que el botón de la franja de CV, al final de la
+           página — sacar disabled y agregar href="LINK_REAL" target="_blank"
+           rel="noopener" cuando el PDF esté subido a Drive/Cloudflare -->
+      <button type="button" class="btn btn-outline" disabled>Descargar CV (.pdf)</button>
     </div>
   </div>
 </header>
@@ -194,7 +237,7 @@
     </div>
 
     <div class="featured-grid reveal-group">
-      <a class="featured-card reveal" href="https://adsudo1990.github.io/icondigital-portfolio/" target="_blank" rel="noopener">
+      <a class="featured-card reveal" href="https://adsudo1990.github.io/icondigital-portfolio/" data-process="Landing armada en HTML/CSS/JS puro, sin frameworks, priorizando velocidad de carga. La estructura de secciones (propuesta de valor, servicios, contacto) está pensada para conversión, no solo para mostrar." target="_blank" rel="noopener">
         <div class="featured-img"><img src="assets/img/icondigital.jpg" alt="Landing de Icon Digital, agencia de marketing" loading="lazy"></div>
         <div class="featured-body">
           <p class="skill-tag">Landing de agencia</p>
@@ -204,7 +247,7 @@
         </div>
       </a>
 
-      <a class="featured-card reveal" href="https://adsudo1990.github.io/waldo-catalogo/" target="_blank" rel="noopener">
+      <a class="featured-card reveal" href="https://adsudo1990.github.io/waldo-catalogo/" data-process="Los renders de cada producto los hice en Blender. El frente es una grilla filtrable liviana, sin backend: el pedido se arma solo y se manda por WhatsApp, sin fricción para el cliente final." target="_blank" rel="noopener">
         <div class="featured-img"><img src="assets/img/waldo.jpg" alt="Catálogo de productos 3D de Waldo Deco" loading="lazy"></div>
         <div class="featured-body">
           <p class="skill-tag">Catálogo 3D + WhatsApp</p>
@@ -216,17 +259,17 @@
     </div>
 
     <div class="grid-cards reveal-group">
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/id-agenda/" target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/id-agenda/" data-process="Panel interno para el equipo de Icon Digital. Se conecta a un Cloudflare Worker + KV como backend liviano, así no hace falta mantener un servidor propio para algo de uso interno." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/idagenda.jpg" alt="Panel Mesa de Contenido" loading="lazy"></div>
         <h4>Mesa de Contenido</h4>
         <p>Panel de gestión de equipo y contenido para el estudio Icon Digital.</p>
       </a>
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/tia_pote_links/" target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/tia_pote_links/" data-process="Link-in-bio con catálogo y pedidos por WhatsApp. El foco estuvo en que cargue instantáneo desde el feed de Instagram y se lea entero en una sola pantalla de celular." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/tiapote.jpg" alt="Link-in-bio de Tía Pote" loading="lazy"></div>
         <h4>Tía Pote</h4>
         <p>Link-in-bio para pastelería moderna: pedidos, consultas y redes en un solo lugar.</p>
       </a>
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/ferias-rauch/" target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/ferias-rauch/" data-process="Link-in-bio para una consignataria de hacienda: sucursales, remates y contacto directo. Misma lógica que Tía Pote — liviano y mobile-first, sin vueltas." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/feriasrauch.jpg" alt="Link-in-bio de Ferias Rauch" loading="lazy"></div>
         <h4>Ferias Rauch</h4>
         <p>Link-in-bio para consignataria de hacienda: sucursales y contacto directo por WhatsApp.</p>
@@ -238,32 +281,32 @@
       <h3 class="h3">Piezas y conceptos</h3>
     </div>
     <div class="grid-cards grid-cards--behance reveal-group">
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/91902907/Puma-Home_" target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/91902907/Puma-Home_" data-process="Ejercicio personal de UI en Figma, sin desarrollo: rediseño del home de e-commerce de Puma con foco en jerarquía tipográfica y minimalismo." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-puma.jpg" alt="Concepto de home de e-commerce para Puma" loading="lazy"></div>
         <h4>Puma Home_</h4>
         <p>Concepto de home minimalista para e-commerce de indumentaria deportiva.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/93493569/IrishBakers_" target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/93493569/IrishBakers_" data-process="Landing conceptual para una panadería artesanal — identidad, tono de marca y estructura de pedido online. Explorando cómo comunicar 'artesanal' sin caer en el cliché de tipografía manuscrita + colores pastel." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-irishbakers.jpg" alt="Landing de panadería IrishBakers" loading="lazy"></div>
         <h4>IrishBakers_</h4>
         <p>Landing para panadería artesanal: identidad, pedido online y catálogo de productos.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/97113945/Don-Raul_" target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/97113945/Don-Raul_" data-process="Identidad de marca completa para una rotisería: isologo, paleta y aplicaciones, más una web de pedidos. El desafío fue que se sintiera de barrio y confiable, no genérica." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-donraul.jpg" alt="Branding y web de rotisería Don Raúl" loading="lazy"></div>
         <h4>Don Raúl</h4>
         <p>Identidad de marca y web de pedidos para una rotisería.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/135656613/Electric_A" target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/135656613/Electric_A" data-process="Render 3D hecho en Blender/Cinema 4D como ejercicio de estudio: tipografía, materiales e iluminación. Es exploración personal, no un encargo de cliente." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-electric.jpg" alt="Pieza 3D Electric_A" loading="lazy"></div>
         <h4>Electric_A</h4>
         <p>Pieza de render 3D explorando tipografía e iluminación.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/179624189/_socialmedia" target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/179624189/_socialmedia" data-process="Piezas recurrentes de community management para Kawasaki Navarro, SYM y UnoMotos. Cada flyer sale en horas, no días, así que el sistema de plantillas fue tan importante como el diseño en sí." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-socialmedia.jpg" alt="Flyers de redes sociales para Kawasaki Navarro, SYM y UnoMotos" loading="lazy"></div>
         <h4>_social.media</h4>
         <p>Flyers y piezas para redes de Kawasaki Navarro, SYM y UnoMotos.</p>
       </a>
-      <a class="grid-card grid-card--video reveal" href="https://www.behance.net/gallery/144928817/Videos_variosae" target="_blank" rel="noopener">
+      <a class="grid-card grid-card--video reveal" href="https://www.behance.net/gallery/144928817/Videos_variosae" data-process="Reel de edición: motion graphics, cortes de ritmo y corrección de color para piezas de redes, hecho en After Effects y Premiere." target="_blank" rel="noopener">
         <div class="grid-img grid-img--video">
           <span class="play-btn" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5z" fill="currentColor"/></svg>
@@ -420,6 +463,25 @@
   </div>
 </footer>
 
+<!-- ============ MODAL DE PROYECTOS (ver js/main.js) ============
+     Se llena dinámicamente al clickear una tarjeta con data-process. Si una
+     tarjeta no tiene ese atributo (por ahora, los slots "Próximamente" del
+     reel y los links externos tipo GitHub/Behance de arriba de cada sección),
+     el click navega normal, no abre el modal. -->
+<div class="project-modal" id="projectModal" hidden>
+  <div class="project-modal-backdrop" data-modal-close></div>
+  <div class="project-modal-panel" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <button class="project-modal-close" type="button" data-modal-close aria-label="Cerrar">✕</button>
+    <div class="project-modal-img"><img id="projectModalImg" src="" alt="" loading="lazy"></div>
+    <div class="project-modal-body">
+      <p class="skill-tag" id="projectModalTag" hidden></p>
+      <h3 id="projectModalTitle"></h3>
+      <p id="projectModalDesc"></p>
+      <a id="projectModalLink" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver en vivo ↗</a>
+    </div>
+  </div>
+</div>
+
 <!-- ============ DOCK NAV ============ -->
 <nav class="dock" aria-label="Navegación principal">
   <a href="#inicio" class="dock-item" data-section="inicio" aria-label="Inicio">
@@ -437,7 +499,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/galaxy.js?v=10"></script>
-<script src="js/main.js?v=18"></script>
+<script src="js/background.js?v=2"></script>
+<script src="js/main.js?v=19"></script>
 </body>
 </html>
