@@ -23,7 +23,6 @@
   const root = document.documentElement;
   const isLight = () => root.getAttribute('data-theme') === 'light';
   const clamp01 = (n) => Math.min(Math.max(n, 0), 1);
-  const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* ---- escena ---- */
   const scene = new THREE.Scene();
@@ -63,10 +62,10 @@
   /* ---- malla de puntos: grilla plana en XZ, cada punto se levanta en Y
      según una suma de senoidales (da el patrón de olas/crestas de la
      referencia sin necesitar una librería de ruido aparte) ---- */
-  // +30% de partículas (125x89 ≈ 110x70 * 1.3) — el juego con el mouse se
-  // luce más con una malla más densa
-  const GRID_COLS = 125;
-  const GRID_ROWS = 89;
+  // +20% más sobre la densidad anterior (137x97 ≈ 125x89 * 1.2) — son casi
+  // el doble de puntos que la primera versión
+  const GRID_COLS = 137;
+  const GRID_ROWS = 97;
   const GRID_W = 34; // ancho total en unidades de mundo
   const GRID_D = 46; // profundidad: se extiende hacia -Z, lejos de cámara
   const count = GRID_COLS * GRID_ROWS;
@@ -119,10 +118,14 @@
   const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const mouseNDC = new THREE.Vector2(-2, -2);
   let mouseWorld = null;
-  const MOUSE_RADIUS = 3.2;
-  const MOUSE_PUSH = 1.6;
+  const MOUSE_RADIUS = 4.5;
+  const MOUSE_PUSH = 2.3;
 
-  if (hasFinePointer) {
+  {
+    // sin filtrar por tipo de puntero: algunos touchpads/mouse se reportan
+    // como "coarse" según el driver, y eso apagaba el efecto para esos casos
+    // sin motivo real — un dispositivo táctil puro simplemente no dispara
+    // mousemove, así que el filtro no hacía falta
     window.addEventListener('mousemove', (e) => {
       mouseNDC.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouseNDC.y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -160,7 +163,7 @@
     const t = elapsedTotal + p * 6;
 
     // mouse → mundo, sobre el plano y=0 (solo con puntero fino)
-    if (hasFinePointer && mouseNDC.x > -1.5) {
+    if (mouseNDC.x > -1.5) {
       raycaster.setFromCamera(mouseNDC, camera);
       const hit = new THREE.Vector3();
       mouseWorld = raycaster.ray.intersectPlane(groundPlane, hit) ? hit : null;
