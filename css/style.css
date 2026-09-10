@@ -999,7 +999,9 @@ html.galaxy-active .statement-text{
   to{ opacity:1; transform:none; }
 }
 .project-modal-img{ aspect-ratio:16/10; background:var(--bg-alt); }
-.project-modal-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+/* mismo encuadre que las miniaturas de las tarjetas (object-position:top), si no
+   el modal recorta desde el centro y muestra un recorte distinto al de la grilla */
+.project-modal-img img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
 .project-modal-body{ padding:28px 30px 32px; }
 .project-modal-body h3{ font-family:var(--font-head); font-size:1.5rem; margin:6px 0 12px; }
 .project-modal-body > p:not(.skill-tag){ color:var(--ink-soft); margin:0 0 24px; line-height:1.6; }
