@@ -653,6 +653,17 @@ ul{ margin:0; padding:0; list-style:none; }
 }
 .grid-card--video:hover .play-btn{ transform:scale(1.1); }
 
+/* pieza "próximamente" (sin link a Behance todavía) — mismo look que .reel-slot */
+.grid-img--soon{
+  display:flex; align-items:center; justify-content:center;
+  border:1.5px dashed var(--line);
+  background:var(--bg-alt);
+  color:var(--ink-faint);
+  font-size:.82rem;
+}
+.grid-card--soon{ cursor:default; }
+.grid-card--soon:hover{ transform:none; }
+
 /* ===================================================================
    3D HOBBY
    =================================================================== */
