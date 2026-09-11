@@ -690,12 +690,14 @@ ul{ margin:0; padding:0; list-style:none; }
 .fade-2{ opacity:.6; }
 .fade-3{ opacity:.45; }
 .fade-4{ opacity:.32; }
+.fade-5{ opacity:.22; }
 /* keep the reveal-on-scroll working alongside the permanent older-role fade
    (higher specificity than plain .reveal.is-visible) */
 .timeline-item.fade-1.reveal.is-visible{ opacity:.75; }
 .timeline-item.fade-2.reveal.is-visible{ opacity:.6; }
 .timeline-item.fade-3.reveal.is-visible{ opacity:.45; }
 .timeline-item.fade-4.reveal.is-visible{ opacity:.32; }
+.timeline-item.fade-5.reveal.is-visible{ opacity:.22; }
 
 /* ===================================================================
    CONTACT
