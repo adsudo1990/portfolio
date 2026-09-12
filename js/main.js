@@ -292,7 +292,8 @@ if (projectModal) {
     modalTag.hidden = !tag;
     if (tag) modalTag.textContent = tag.textContent;
     modalTitle.textContent = heading ? heading.textContent : '';
-    modalDesc.textContent = card.dataset.process;
+    const isEn = document.documentElement.getAttribute('data-lang') === 'en';
+    modalDesc.textContent = (isEn && card.dataset.processEn) ? card.dataset.processEn : card.dataset.process;
     modalLink.href = card.href;
 
     lastFocused = document.activeElement;

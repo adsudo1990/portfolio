@@ -764,6 +764,7 @@ ul{ margin:0; padding:0; list-style:none; }
   font-weight:600;
   padding-right:0;
 }
+.marquee-sep{ color:#35DCC6; padding:0 .3em; }
 @keyframes scroll-marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:.85rem; color:rgba(255,255,255,.6); }
 
@@ -841,6 +842,41 @@ ul{ margin:0; padding:0; list-style:none; }
 :root[data-theme="light"] .theme-toggle .icon-moon{ display:block; }
 @media (max-width: 640px){
   .theme-toggle{ top:14px; right:14px; width:38px; height:38px; }
+}
+
+/* ===================================================================
+   LANGUAGE TOGGLE — misma pill que el theme toggle, ubicada justo
+   debajo para mantener el mismo lenguaje visual (glass + blur)
+   =================================================================== */
+.lang-toggle{
+  position:fixed;
+  top:78px;
+  right:24px;
+  z-index:101;
+  width:44px;
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(27, 33, 41, .55);
+  backdrop-filter:blur(20px) saturate(1.5);
+  -webkit-backdrop-filter:blur(20px) saturate(1.5);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:999px;
+  color:var(--accent-ink);
+  cursor:pointer;
+  transition:transform .15s ease, background .15s ease;
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:.72rem;
+  letter-spacing:.02em;
+}
+.lang-toggle:hover{ background:rgba(27, 33, 41, .75); transform:scale(1.06); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+  .lang-toggle{ background:var(--dock-bg); }
+}
+@media (max-width: 640px){
+  .lang-toggle{ top:60px; right:14px; width:38px; height:38px; font-size:.66rem; }
 }
 
 /* ===================================================================

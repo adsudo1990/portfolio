@@ -12,6 +12,16 @@
     }
   } catch (e) {}
 </script>
+<script>
+  /* mismo criterio que el tema: aplica el idioma guardado antes del primer
+     paint para que no haya flash de español si el visitante ya eligió inglés */
+  try {
+    if (localStorage.getItem('lang') === 'en') {
+      document.documentElement.setAttribute('lang', 'en');
+      document.documentElement.setAttribute('data-lang', 'en');
+    }
+  } catch (e) {}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio completo — Sergio Visgarra</title>
 <meta name="description" content="Todos los proyectos de Sergio Visgarra: web, dashboards, catálogos, branding, social media, video y 3D.">
@@ -35,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Crete+Round&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=37">
+<link rel="stylesheet" href="css/style.css?v=38">
 <noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
@@ -51,14 +61,19 @@
   <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
 </button>
 
+<!-- ============ LANGUAGE TOGGLE ============ -->
+<button id="langToggle" class="lang-toggle" type="button" aria-label="Switch to English">
+  <span class="lang-toggle-label">ES</span>
+</button>
+
 <!-- ============ PAGE HEADER ============ -->
 <header class="page-header">
   <div class="wrap page-header-inner">
     <a href="index.html" class="page-back">← Sergio Visgarra</a>
     <div>
-      <p class="eyebrow">/ Portfolio completo</p>
-      <h1 class="h2">Todos <span class="accent-text">los proyectos</span></h1>
-      <p class="lead">Sitios, dashboards, catálogos, piezas de marca, social media y 3D. Lo más pulido está en la <a href="index.html#portfolio" class="inline-link">página principal</a>.</p>
+      <p class="eyebrow" data-i18n="ph.eyebrow">/ Portfolio completo</p>
+      <h1 class="h2" data-i18n="ph.h1">Todos <span class="accent-text">los proyectos</span></h1>
+      <p class="lead" data-i18n="ph.lead">Sitios, dashboards, catálogos, piezas de marca, social media y 3D. Lo más pulido está en la <a href="index.html#portfolio" class="inline-link">página principal</a>.</p>
     </div>
   </div>
 </header>
@@ -68,36 +83,36 @@
   <div class="wrap">
     <div class="section-head reveal-group">
       <div class="reveal">
-        <p class="eyebrow">/ Sitios propios</p>
-        <h2 class="h2">Web <span class="accent-text">&amp; GitHub</span></h2>
+        <p class="eyebrow" data-i18n="pw.eyebrow">/ Sitios propios</p>
+        <h2 class="h2" data-i18n="pw.h2">Web <span class="accent-text">&amp; GitHub</span></h2>
       </div>
       <a href="https://github.com/adsudo1990" target="_blank" rel="noopener" class="btn btn-outline btn-sm reveal">GitHub ↗</a>
     </div>
     <div class="grid-cards grid-cards--3 reveal-group">
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/icondigital-portfolio/" data-process="Landing armada en HTML/CSS/JS puro, sin frameworks, para que cargue rápido. Ordené las secciones (qué ofrecen, servicios, contacto) pensando en que el visitante llegue al contacto sin dar vueltas." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/icondigital-portfolio/" data-process="Landing armada en HTML/CSS/JS puro, sin frameworks, para que cargue rápido. Ordené las secciones (qué ofrecen, servicios, contacto) pensando en que el visitante llegue al contacto sin dar vueltas." data-process-en="Landing page built in plain HTML/CSS/JS, no frameworks, for fast loading. I ordered the sections (what they offer, services, contact) so the visitor reaches contact without detours." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/icondigital.jpg" alt="Landing de Icon Digital" loading="lazy"></div>
         <h4>Icon Digital</h4>
-        <p>Landing de agencia de marketing digital.</p>
+        <p data-i18n="proj.icondigital.grid">Landing de agencia de marketing digital.</p>
       </a>
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/waldo-catalogo/" data-process="Los renders de cada producto los hice en Blender. El frente es una grilla filtrable liviana, sin backend: el pedido se arma solo y se manda por WhatsApp, sin que el cliente tenga que registrarse." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/waldo-catalogo/" data-process="Los renders de cada producto los hice en Blender. El frente es una grilla filtrable liviana, sin backend: el pedido se arma solo y se manda por WhatsApp, sin que el cliente tenga que registrarse." data-process-en="I made the render of each product in Blender. The front end is a lightweight filterable grid, no backend: the order builds itself and gets sent over WhatsApp, no sign-up needed for the customer." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/waldo.jpg" alt="Catálogo Waldo Deco" loading="lazy"></div>
         <h4>Waldo Catálogo</h4>
-        <p>Catálogo 3D-print con pedidos por WhatsApp.</p>
+        <p data-i18n="proj.waldo.grid">Catálogo 3D-print con pedidos por WhatsApp.</p>
       </a>
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/id-agenda/" data-process="Panel interno para el equipo de Icon Digital. Se conecta a un Cloudflare Worker + KV como backend liviano, así no hace falta mantener un servidor propio para algo de uso interno." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/id-agenda/" data-process="Panel interno para el equipo de Icon Digital. Se conecta a un Cloudflare Worker + KV como backend liviano, así no hace falta mantener un servidor propio para algo de uso interno." data-process-en="Internal panel for the Icon Digital team. It connects to a Cloudflare Worker + KV as a lightweight backend, so there is no need to run a full server for something used internally." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/idagenda.jpg" alt="Panel Mesa de Contenido" loading="lazy"></div>
         <h4>Mesa de Contenido</h4>
-        <p>Panel de gestión de equipo y contenido.</p>
+        <p data-i18n="proj.mesacontenido.grid">Panel de gestión de equipo y contenido.</p>
       </a>
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/tia_pote_links/" data-process="Link-in-bio con catálogo y pedidos por WhatsApp. Quería que cargue al toque desde el feed de Instagram y que entre entero en una pantalla de celular." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/tia_pote_links/" data-process="Link-in-bio con catálogo y pedidos por WhatsApp. Quería que cargue al toque desde el feed de Instagram y que entre entero en una pantalla de celular." data-process-en="Link-in-bio with a catalog and WhatsApp ordering. I wanted it to load instantly from the Instagram feed and fit entirely on one phone screen." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/tiapote.jpg" alt="Link-in-bio de Tía Pote" loading="lazy"></div>
         <h4>Tía Pote</h4>
-        <p>Link-in-bio para pastelería moderna.</p>
+        <p data-i18n="proj.tiapote.grid">Link-in-bio para pastelería moderna.</p>
       </a>
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/ferias-rauch/" data-process="Link-in-bio para una consignataria de hacienda: sucursales, remates y contacto directo. Misma lógica que Tía Pote: liviano, pensado para el celular y sin vueltas." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/ferias-rauch/" data-process="Link-in-bio para una consignataria de hacienda: sucursales, remates y contacto directo. Misma lógica que Tía Pote: liviano, pensado para el celular y sin vueltas." data-process-en="Link-in-bio for a livestock auction house: branches, auctions and direct contact. Same approach as Tía Pote: lightweight, mobile-first, no detours." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/feriasrauch.jpg" alt="Link-in-bio de Ferias Rauch" loading="lazy"></div>
         <h4>Ferias Rauch</h4>
-        <p>Link-in-bio para consignataria de hacienda.</p>
+        <p data-i18n="proj.feriasrauch.grid">Link-in-bio para consignataria de hacienda.</p>
       </a>
     </div>
   </div>
@@ -108,70 +123,70 @@
   <div class="wrap">
     <div class="section-head reveal-group">
       <div class="reveal">
-        <p class="eyebrow">/ Piezas y conceptos</p>
-        <h2 class="h2">De mi <span class="accent-text">Behance</span></h2>
+        <p class="eyebrow" data-i18n="pb.eyebrow">/ Piezas y conceptos</p>
+        <h2 class="h2" data-i18n="pb.h2">De mi <span class="accent-text">Behance</span></h2>
       </div>
       <a href="https://www.behance.net/svdgw" target="_blank" rel="noopener" class="btn btn-outline btn-sm reveal">Behance ↗</a>
     </div>
     <div class="grid-cards grid-cards--3 reveal-group">
       <div class="grid-card grid-card--soon reveal">
-        <div class="grid-img grid-img--soon"><span>Próximamente</span></div>
-        <h4>Piezas gráficas &amp; arquigrafía</h4>
-        <p>Trabajo impreso real: cartelería, señalética y gráfica de punto de venta. Estoy subiendo las fotos a mi Behance.</p>
+        <div class="grid-img grid-img--soon"><span data-i18n="pf.soon.badge">Próximamente</span></div>
+        <h4 data-i18n="pf.soon.title">Piezas gráficas &amp; arquigrafía</h4>
+        <p data-i18n="pf.soon.desc">Trabajo impreso real: cartelería, señalética y gráfica de punto de venta. Estoy subiendo las fotos a mi Behance.</p>
       </div>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/91902907/Puma-Home_" data-process="Rediseño del home de e-commerce de Puma, hecho en Figma como ejercicio personal. Me interesaba la jerarquía tipográfica y quitar todo lo que sobra." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/91902907/Puma-Home_" data-process="Rediseño del home de e-commerce de Puma, hecho en Figma como ejercicio personal. Me interesaba la jerarquía tipográfica y quitar todo lo que sobra." data-process-en="Redesign of the Puma e-commerce homepage, made in Figma as a personal exercise. I was interested in typographic hierarchy and stripping away anything unnecessary." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-puma.jpg" alt="Concepto de home de e-commerce para Puma" loading="lazy"></div>
         <h4>Puma Home_</h4>
-        <p>Concepto de home minimalista para e-commerce.</p>
+        <p data-i18n="proj.puma.pf">Concepto de home minimalista para e-commerce.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/93493569/IrishBakers_" data-process="Landing conceptual para una panadería artesanal: identidad, tono de marca y pedido online. La idea era comunicar «artesanal» sin caer en el cliché de tipografía manuscrita y colores pastel." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/93493569/IrishBakers_" data-process="Landing conceptual para una panadería artesanal: identidad, tono de marca y pedido online. La idea era comunicar «artesanal» sin caer en el cliché de tipografía manuscrita y colores pastel." data-process-en="Concept landing page for an artisan bakery: identity, brand tone and online ordering. The idea was to communicate “artisan” without falling into the handwritten-font-and-pastel-colors cliché." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-irishbakers.jpg" alt="Landing de panadería IrishBakers" loading="lazy"></div>
         <h4>IrishBakers_</h4>
-        <p>Landing para panadería artesanal.</p>
+        <p data-i18n="proj.irishbakers.pf">Landing para panadería artesanal.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/97113945/Don-Raul_" data-process="Identidad de marca completa para una rotisería: isologo, paleta, aplicaciones y una web de pedidos. Quería que se sintiera de barrio y confiable, sin caer en lo genérico." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/97113945/Don-Raul_" data-process="Identidad de marca completa para una rotisería: isologo, paleta, aplicaciones y una web de pedidos. Quería que se sintiera de barrio y confiable, sin caer en lo genérico." data-process-en="Full brand identity for a rotisería (local deli): logo, palette, applications and an ordering site. I wanted it to feel neighborhood-trustworthy, not generic." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-donraul.jpg" alt="Branding y web de rotisería Don Raúl" loading="lazy"></div>
         <h4>Don Raúl</h4>
-        <p>Identidad de marca y web de pedidos.</p>
+        <p data-i18n="proj.donraul.pf">Identidad de marca y web de pedidos.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/135656613/Electric_A" data-process="Render 3D en Blender y Cinema 4D para practicar tipografía, materiales e iluminación. Lo hice para mí, no fue un encargo." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/135656613/Electric_A" data-process="Render 3D en Blender y Cinema 4D para practicar tipografía, materiales e iluminación. Lo hice para mí, no fue un encargo." data-process-en="3D render in Blender and Cinema 4D to practice typography, materials and lighting. I made it for myself, not a client job." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-electric.jpg" alt="Pieza 3D Electric_A" loading="lazy"></div>
         <h4>Electric_A</h4>
-        <p>Render 3D explorando tipografía e iluminación.</p>
+        <p data-i18n="proj.electric.pf">Render 3D explorando tipografía e iluminación.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/179624189/_socialmedia" data-process="Piezas de redes para Kawasaki Navarro, SYM y UnoMotos, semana a semana. Cada flyer sale en horas, así que armar un buen sistema de plantillas pesó tanto como el diseño." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/179624189/_socialmedia" data-process="Piezas de redes para Kawasaki Navarro, SYM y UnoMotos, semana a semana. Cada flyer sale en horas, así que armar un buen sistema de plantillas pesó tanto como el diseño." data-process-en="Social media pieces for Kawasaki Navarro, SYM and UnoMotos, week after week. Each flyer ships in hours, so building a solid template system mattered as much as the design itself." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-socialmedia.jpg" alt="Flyers para Kawasaki Navarro, SYM y UnoMotos" loading="lazy"></div>
         <h4>_social.media</h4>
-        <p>Flyers para Kawasaki Navarro, SYM y UnoMotos.</p>
+        <p data-i18n="proj.socialmedia.pf">Flyers para Kawasaki Navarro, SYM y UnoMotos.</p>
       </a>
-      <a class="grid-card grid-card--video reveal" href="https://www.behance.net/gallery/144928817/Videos_variosae" data-process="Reel de edición para piezas de redes: motion graphics, cortes al ritmo y corrección de color, en After Effects y Premiere." target="_blank" rel="noopener">
+      <a class="grid-card grid-card--video reveal" href="https://www.behance.net/gallery/144928817/Videos_variosae" data-process="Reel de edición para piezas de redes: motion graphics, cortes al ritmo y corrección de color, en After Effects y Premiere." data-process-en="Editing reel for social media pieces: motion graphics, rhythm cuts and color correction, done in After Effects and Premiere." target="_blank" rel="noopener">
         <div class="grid-img grid-img--video">
           <span class="play-btn" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5z" fill="currentColor"/></svg>
           </span>
         </div>
         <h4>_videos</h4>
-        <p>Reel de edición: motion, cortes y color.</p>
+        <p data-i18n="proj.videos.pf">Reel de edición: motion, cortes y color.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/91749625/GamesTorrent_" data-process="Concepto de UI para una app de videojuegos: pantallas de biblioteca, descarga y perfil. Lo armé como sistema de diseño, pensando primero los componentes y después las pantallas." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/91749625/GamesTorrent_" data-process="Concepto de UI para una app de videojuegos: pantallas de biblioteca, descarga y perfil. Lo armé como sistema de diseño, pensando primero los componentes y después las pantallas." data-process-en="UI concept for a video game app: library, download and profile screens. I built it as a design system, thinking about the components first and the screens second." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-gamestorrent.jpg" alt="UI de app Games Torrent" loading="lazy"></div>
         <h4>GamesTorrent_</h4>
-        <p>Concepto de UI para app de videojuegos.</p>
+        <p data-i18n="proj.gamestorrent">Concepto de UI para app de videojuegos.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/90446647/INFO-MUSIC_" data-process="Concepto de app/sitio sobre discografías. Me interesaba resolver cómo mostrar grillas de álbumes muy densas sin marear al que las mira." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/90446647/INFO-MUSIC_" data-process="Concepto de app/sitio sobre discografías. Me interesaba resolver cómo mostrar grillas de álbumes muy densas sin marear al que las mira." data-process-en="App/site concept about music discographies. I was interested in solving how to show very dense album grids without overwhelming the viewer." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-infomusic.jpg" alt="UI de app InfoMusic" loading="lazy"></div>
         <h4>INFO MUSIC_</h4>
-        <p>Concepto de app/sitio sobre discografías.</p>
+        <p data-i18n="proj.infomusic">Concepto de app/sitio sobre discografías.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/83576281/publicity_" data-process="Pieza publicitaria para una campaña de Claro. Trabajo de agencia, con los tiempos y las rondas de aprobación que tiene una marca grande." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/83576281/publicity_" data-process="Pieza publicitaria para una campaña de Claro. Trabajo de agencia, con los tiempos y las rondas de aprobación que tiene una marca grande." data-process-en="Ad piece for a Claro campaign. Agency work, with the timelines and approval rounds a large brand requires." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-publicity.jpg" alt="Publicidad Claro Conciencia Preventiva" loading="lazy"></div>
         <h4>Publicity_</h4>
-        <p>Pieza publicitaria para Claro.</p>
+        <p data-i18n="proj.publicity">Pieza publicitaria para Claro.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/83701869/socialmediaads_" data-process="Piezas de campaña de Cyber Monday para retail, con una versión para feed y otra para historias." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/83701869/socialmediaads_" data-process="Piezas de campaña de Cyber Monday para retail, con una versión para feed y otra para historias." data-process-en="Cyber Monday campaign pieces for retail, with one version for feed and another for stories." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-socialads.jpg" alt="Pieza de campaña Cyber Monday" loading="lazy"></div>
         <h4>social.media.ads_</h4>
-        <p>Piezas de campaña para retail.</p>
+        <p data-i18n="proj.socialads">Piezas de campaña para retail.</p>
       </a>
     </div>
   </div>
@@ -181,14 +196,14 @@
 <section class="section" id="reel">
   <div class="wrap">
     <div class="reveal-group">
-      <p class="eyebrow reveal">/ Edición de video</p>
-      <h2 class="h2 reveal">Reel <span class="accent-text">vertical</span></h2>
-      <p class="lead reveal">Cortos de edición (After Effects, Premiere, CapCut). Los voy a ir sumando acá a medida que los suba.</p>
+      <p class="eyebrow reveal" data-i18n="pr.eyebrow">/ Edición de video</p>
+      <h2 class="h2 reveal" data-i18n="pr.h2">Reel <span class="accent-text">vertical</span></h2>
+      <p class="lead reveal" data-i18n="pr.lead">Cortos de edición (After Effects, Premiere, CapCut). Los voy a ir sumando acá a medida que los suba.</p>
     </div>
     <div class="reel-grid reveal-group">
-      <div class="reel-slot reveal"><span>Próximamente</span></div>
-      <div class="reel-slot reveal"><span>Próximamente</span></div>
-      <div class="reel-slot reveal"><span>Próximamente</span></div>
+      <div class="reel-slot reveal"><span data-i18n="pf.soon.badge">Próximamente</span></div>
+      <div class="reel-slot reveal"><span data-i18n="pf.soon.badge">Próximamente</span></div>
+      <div class="reel-slot reveal"><span data-i18n="pf.soon.badge">Próximamente</span></div>
     </div>
   </div>
 </section>
@@ -196,9 +211,9 @@
 <!-- ============ CV DOWNLOAD ============ -->
 <section class="cv-band">
   <div class="wrap">
-    <p class="cv-band-title">¿Querés el CV en PDF?</p>
-    <p class="cv-band-note">La versión completa, para leer tranquilo o guardártela.</p>
-    <a class="btn btn-cv" href="https://sergio-cv.sergio-visgarra.workers.dev/cv" target="_blank" rel="noopener">Descargar CV en PDF</a>
+    <p class="cv-band-title" data-i18n="cv.title">¿Querés el CV en PDF?</p>
+    <p class="cv-band-note" data-i18n="cv.note">La versión completa, para leer tranquilo o guardártela.</p>
+    <a class="btn btn-cv" href="https://sergio-cv.sergio-visgarra.workers.dev/cv" target="_blank" rel="noopener" data-i18n="cv.btn">Descargar CV en PDF</a>
   </div>
 </section>
 
@@ -220,7 +235,7 @@
       <p class="skill-tag" id="projectModalTag" hidden></p>
       <h3 id="projectModalTitle"></h3>
       <p id="projectModalDesc"></p>
-      <a id="projectModalLink" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver en vivo ↗</a>
+      <a id="projectModalLink" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm" data-i18n="md.viewlive">Ver en vivo ↗</a>
     </div>
   </div>
 </div>
@@ -231,9 +246,9 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 4L21 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
   <a href="index.html#skills" class="dock-item">Skills</a>
-  <a href="index.html#sobre-mi" class="dock-item">Sobre mí</a>
+  <a href="index.html#sobre-mi" class="dock-item" data-i18n="dk.about">Sobre mí</a>
   <a href="portfolio.html" class="dock-item active">Portfolio</a>
-  <a href="index.html#contacto" class="dock-item dock-cta">Contactar</a>
+  <a href="index.html#contacto" class="dock-item dock-cta" data-i18n="dk.contact">Contactar</a>
 </nav>
 
 </div><!-- /.site-content -->
@@ -242,6 +257,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="js/background.js?v=5"></script>
-<script src="js/main.js?v=20"></script>
+<script src="js/i18n.js?v=1"></script>
+<script src="js/main.js?v=21"></script>
 </body>
 </html>

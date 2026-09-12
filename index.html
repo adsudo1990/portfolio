@@ -12,6 +12,16 @@
     }
   } catch (e) {}
 </script>
+<script>
+  /* mismo criterio que el tema: aplica el idioma guardado antes del primer
+     paint para que no haya flash de español si el visitante ya eligió inglés */
+  try {
+    if (localStorage.getItem('lang') === 'en') {
+      document.documentElement.setAttribute('lang', 'en');
+      document.documentElement.setAttribute('data-lang', 'en');
+    }
+  } catch (e) {}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sergio Visgarra — Diseñador Gráfico / Web / UX-UI / 3D</title>
 <meta name="description" content="Portfolio de Sergio Visgarra. Diseño gráfico, web, UX/UI y 3D, con IA generativa en el día a día. Disponible para nuevos proyectos.">
@@ -58,7 +68,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Crete+Round&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=37">
+<link rel="stylesheet" href="css/style.css?v=38">
 <noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
@@ -74,12 +84,17 @@
   <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
 </button>
 
+<!-- ============ LANGUAGE TOGGLE ============ -->
+<button id="langToggle" class="lang-toggle" type="button" aria-label="Switch to English">
+  <span class="lang-toggle-label">ES</span>
+</button>
+
 <!-- ============ HERO ============ -->
 <header class="hero" id="inicio">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap hero-inner reveal-group">
     <div class="hero-split reveal-group">
-      <p class="eyebrow reveal hero-eyebrow">Diseñador Digital</p>
+      <p class="eyebrow reveal hero-eyebrow" data-i18n="h.eyebrow">Diseñador Digital</p>
       <h1 class="hero-name hero-name--first reveal">Sergio</h1>
 
       <div class="hero-photo reveal">
@@ -89,11 +104,11 @@
       <h1 class="hero-name hero-name--last reveal">Visgarra</h1>
       <p class="hero-place reveal">Buenos Aires, Argentina</p>
     </div>
-    <p class="hero-meta reveal">Puedo arrancar ya, híbrido o <span class="accent-text">100% remoto</span></p>
+    <p class="hero-meta reveal" data-i18n="h.meta">Puedo arrancar ya, híbrido o <span class="accent-text">100% remoto</span></p>
     <div class="hero-cta reveal">
-      <a href="#portfolio" class="btn btn-primary">Ver portfolio</a>
-      <a href="#contacto" class="btn btn-outline">Contactar</a>
-      <a href="https://sergio-cv.sergio-visgarra.workers.dev/cv" class="btn btn-outline" target="_blank" rel="noopener">Descargar CV (.pdf)</a>
+      <a href="#portfolio" class="btn btn-primary" data-i18n="h.cta.portfolio">Ver portfolio</a>
+      <a href="#contacto" class="btn btn-outline" data-i18n="h.cta.contact">Contactar</a>
+      <a href="https://sergio-cv.sergio-visgarra.workers.dev/cv" class="btn btn-outline" target="_blank" rel="noopener" data-i18n="h.cta.cv">Descargar CV (.pdf)</a>
     </div>
   </div>
 </header>
@@ -102,62 +117,62 @@
 <section class="section" id="skills">
   <div class="wrap">
     <div class="reveal-group">
-      <p class="eyebrow reveal">/ Lo que hago</p>
-      <h2 class="h2 reveal">Áreas <span class="accent-text">de trabajo</span></h2>
-      <p class="lead reveal">Hace 14 años que voy del diseño de una pieza gráfica al render de un stand comercial, con IA generativa en el medio todos los días.</p>
+      <p class="eyebrow reveal" data-i18n="sk.eyebrow">/ Lo que hago</p>
+      <h2 class="h2 reveal" data-i18n="sk.h2">Áreas <span class="accent-text">de trabajo</span></h2>
+      <p class="lead reveal" data-i18n="sk.lead">Hace 14 años que voy del diseño de una pieza gráfica al render de un stand comercial, con IA generativa en el medio todos los días.</p>
     </div>
 
     <div class="skills-layout">
     <div class="skills-grid">
       <article class="skill-card">
-        <p class="skill-tag">Punto de venta &amp; comunicación</p>
-        <h3>01. Diseño Gráfico</h3>
-        <p>Piezas para punto de venta y comunicación de marca: folletería, stickers, cartelería y arquigrafía.</p>
+        <p class="skill-tag" data-i18n="sk1.tag">Punto de venta &amp; comunicación</p>
+        <h3 data-i18n="sk1.title">01. Diseño Gráfico</h3>
+        <p data-i18n="sk1.desc">Piezas para punto de venta y comunicación de marca: folletería, stickers, cartelería y arquigrafía.</p>
         <ul class="tool-list">
           <li>Adobe Photoshop</li><li>Adobe Illustrator</li>
         </ul>
       </article>
 
       <article class="skill-card">
-        <p class="skill-tag">Landings &amp; sitios</p>
-        <h3>02. Diseño Web</h3>
-        <p>Sitios y landing pages responsive, catálogos y link-in-bio listos para publicar.</p>
+        <p class="skill-tag" data-i18n="sk2.tag">Landings &amp; sitios</p>
+        <h3 data-i18n="sk2.title">02. Diseño Web</h3>
+        <p data-i18n="sk2.desc">Sitios y landing pages responsive, catálogos y link-in-bio listos para publicar.</p>
         <ul class="tool-list">
           <li>WordPress</li><li>Bootstrap</li><li>Sublime Text</li><li>VS Code</li>
         </ul>
       </article>
 
       <article class="skill-card">
-        <p class="skill-tag">Prototipado</p>
+        <p class="skill-tag" data-i18n="sk3.tag">Prototipado</p>
         <h3>03. UX / UI</h3>
-        <p>Dashboards y prototipos funcionales de apps, pensados desde el flujo real de uso.</p>
+        <p data-i18n="sk3.desc">Dashboards y prototipos funcionales de apps, pensados desde el flujo real de uso.</p>
         <ul class="tool-list">
           <li>Figma</li>
         </ul>
       </article>
 
       <article class="skill-card">
-        <p class="skill-tag">Montajes para retail</p>
+        <p class="skill-tag" data-i18n="sk4.tag">Montajes para retail</p>
         <h3>04. Motion &amp; 3D</h3>
-        <p>Montajes y visualizaciones 3D de locales y stands comerciales, piezas audiovisuales y motion.</p>
+        <p data-i18n="sk4.desc">Montajes y visualizaciones 3D de locales y stands comerciales, piezas audiovisuales y motion.</p>
         <ul class="tool-list">
           <li>After Effects</li><li>Premiere</li><li>CapCut</li><li>Cinema 4D</li><li>Blender</li>
         </ul>
       </article>
 
       <article class="skill-card">
-        <p class="skill-tag">Flujo diario</p>
-        <h3>05. IA Generativa</h3>
-        <p>Diseño y generación de imágenes y video con IA, como una herramienta más del día a día.</p>
+        <p class="skill-tag" data-i18n="sk5.tag">Flujo diario</p>
+        <h3 data-i18n="sk5.title">05. IA Generativa</h3>
+        <p data-i18n="sk5.desc">Diseño y generación de imágenes y video con IA, como una herramienta más del día a día.</p>
         <ul class="tool-list">
           <li>ChatGPT</li><li>Nano Banana</li><li>Google Flow</li>
         </ul>
       </article>
 
       <article class="skill-card skill-card--hobby">
-        <p class="skill-tag">Proyecto personal</p>
+        <p class="skill-tag" data-i18n="sk6.tag">Proyecto personal</p>
         <h3>06. 3D <span class="tag-hobby">Hobby</span></h3>
-        <p>Modelado y texturizado de personajes, como exploración personal fuera del trabajo diario.</p>
+        <p data-i18n="sk6.desc">Modelado y texturizado de personajes, como exploración personal fuera del trabajo diario.</p>
         <ul class="tool-list">
           <li>ZBrush</li><li>Substance Painter</li>
         </ul>
@@ -180,11 +195,11 @@
               <img src="assets/favicon.png" alt="">
             </span>
             <p class="skills-visual-name">Sergio Visgarra</p>
-            <p class="skills-visual-role">Diseñador Gráfico &amp; Web</p>
+            <p class="skills-visual-role" data-i18n="sk.visual.role">Diseñador Gráfico &amp; Web</p>
           </div>
         </div>
         <a href="#contacto" class="skills-visual-face skills-visual-back">
-          <span class="skills-visual-back-text">Trabajemos juntos</span>
+          <span class="skills-visual-back-text" data-i18n="sk.visual.back">Trabajemos juntos</span>
           <span class="skills-visual-back-arrow" aria-hidden="true">↓</span>
         </a>
       </div>
@@ -196,7 +211,7 @@
 <!-- ============ STATEMENT (se revela palabra por palabra con el scroll) ============ -->
 <section class="statement" id="statement">
   <div class="wrap">
-    <p class="statement-text word-reveal" id="statementText">Diseño para generar una mejor comunicación creativa en distintos rubros de Latinoamérica.</p>
+    <p class="statement-text word-reveal" id="statementText" data-i18n="st.text">Diseño para generar una mejor comunicación creativa en distintos rubros de Latinoamérica.</p>
   </div>
 </section>
 
@@ -204,9 +219,9 @@
 <section class="section section-alt" id="sobre-mi">
   <div class="wrap about-grid">
     <div class="reveal-group">
-      <p class="eyebrow reveal">/ Sobre mí</p>
-      <h2 class="h2 reveal">Creativo <span class="accent-text">de fondo</span></h2>
-      <p class="about-text reveal" id="aboutText">
+      <p class="eyebrow reveal" data-i18n="ab.eyebrow">/ Sobre mí</p>
+      <h2 class="h2 reveal" data-i18n="ab.h2">Creativo <span class="accent-text">de fondo</span></h2>
+      <p class="about-text reveal" id="aboutText" data-i18n="ab.text">
         Ahora mismo ando metido en el diseño de personajes 3D y el vibecoding. Las uso para
         ayudar a pequeñas empresas a resolver el día a día, tanto en lo visual como en la
         forma de trabajar.
@@ -228,95 +243,95 @@
   <div class="wrap">
     <div class="section-head reveal-group">
       <div class="reveal">
-        <p class="eyebrow">/ Proyectos</p>
-        <h2 class="h2">Trabajo <span class="accent-text">seleccionado</span></h2>
+        <p class="eyebrow" data-i18n="pf.eyebrow">/ Proyectos</p>
+        <h2 class="h2" data-i18n="pf.h2">Trabajo <span class="accent-text">seleccionado</span></h2>
       </div>
-      <a href="portfolio.html" class="btn btn-outline btn-sm reveal">Portfolio completo →</a>
+      <a href="portfolio.html" class="btn btn-outline btn-sm reveal" data-i18n="pf.viewall">Portfolio completo →</a>
     </div>
 
     <div class="featured-grid reveal-group">
-      <a class="featured-card reveal" href="https://adsudo1990.github.io/icondigital-portfolio/" data-process="Landing armada en HTML/CSS/JS puro, sin frameworks, para que cargue rápido. Ordené las secciones (qué ofrecen, servicios, contacto) pensando en que el visitante llegue al contacto sin dar vueltas." target="_blank" rel="noopener">
+      <a class="featured-card reveal" href="https://adsudo1990.github.io/icondigital-portfolio/" data-process="Landing armada en HTML/CSS/JS puro, sin frameworks, para que cargue rápido. Ordené las secciones (qué ofrecen, servicios, contacto) pensando en que el visitante llegue al contacto sin dar vueltas." data-process-en="Landing page built in plain HTML/CSS/JS, no frameworks, for fast loading. I ordered the sections (what they offer, services, contact) so the visitor reaches contact without detours." target="_blank" rel="noopener">
         <div class="featured-img"><img src="assets/img/icondigital.jpg" alt="Landing de Icon Digital, agencia de marketing" loading="lazy"></div>
         <div class="featured-body">
-          <p class="skill-tag">Landing de agencia</p>
+          <p class="skill-tag" data-i18n="proj.icondigital.tag">Landing de agencia</p>
           <h3>Icon Digital</h3>
-          <p>Landing completa para una agencia de marketing digital: identidad, textos y el orden de las secciones para llevar al visitante hasta el contacto.</p>
-          <p class="stack">Diseño Web · UX/UI · Branding</p>
+          <p data-i18n="proj.icondigital.featured">Landing completa para una agencia de marketing digital: identidad, textos y el orden de las secciones para llevar al visitante hasta el contacto.</p>
+          <p class="stack" data-i18n="proj.icondigital.stack">Diseño Web · UX/UI · Branding</p>
         </div>
       </a>
 
-      <a class="featured-card reveal" href="https://adsudo1990.github.io/waldo-catalogo/" data-process="Los renders de cada producto los hice en Blender. El frente es una grilla filtrable liviana, sin backend: el pedido se arma solo y se manda por WhatsApp, sin que el cliente tenga que registrarse." target="_blank" rel="noopener">
+      <a class="featured-card reveal" href="https://adsudo1990.github.io/waldo-catalogo/" data-process="Los renders de cada producto los hice en Blender. El frente es una grilla filtrable liviana, sin backend: el pedido se arma solo y se manda por WhatsApp, sin que el cliente tenga que registrarse." data-process-en="I made the render of each product in Blender. The front end is a lightweight filterable grid, no backend: the order builds itself and gets sent over WhatsApp, no sign-up needed for the customer." target="_blank" rel="noopener">
         <div class="featured-img"><img src="assets/img/waldo.jpg" alt="Catálogo de productos 3D de Waldo Deco" loading="lazy"></div>
         <div class="featured-body">
-          <p class="skill-tag">Catálogo 3D + WhatsApp</p>
+          <p class="skill-tag" data-i18n="proj.waldo.tag">Catálogo 3D + WhatsApp</p>
           <h3>Waldo Catálogo</h3>
-          <p>Catálogo de decoración impresa en 3D con pedidos por WhatsApp. Más de 50 productos, con renders propios.</p>
-          <p class="stack">Diseño Web · 3D · E-commerce</p>
+          <p data-i18n="proj.waldo.featured">Catálogo de decoración impresa en 3D con pedidos por WhatsApp. Más de 50 productos, con renders propios.</p>
+          <p class="stack" data-i18n="proj.waldo.stack">Diseño Web · 3D · E-commerce</p>
         </div>
       </a>
     </div>
 
     <div class="grid-cards reveal-group">
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/id-agenda/" data-process="Panel interno para el equipo de Icon Digital. Se conecta a un Cloudflare Worker + KV como backend liviano, así no hace falta mantener un servidor propio para algo de uso interno." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/id-agenda/" data-process="Panel interno para el equipo de Icon Digital. Se conecta a un Cloudflare Worker + KV como backend liviano, así no hace falta mantener un servidor propio para algo de uso interno." data-process-en="Internal panel for the Icon Digital team. It connects to a Cloudflare Worker + KV as a lightweight backend, so there is no need to run a full server for something used internally." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/idagenda.jpg" alt="Panel Mesa de Contenido" loading="lazy"></div>
         <h4>Mesa de Contenido</h4>
-        <p>Panel de gestión de equipo y contenido para el estudio Icon Digital.</p>
+        <p data-i18n="proj.mesacontenido.idx">Panel de gestión de equipo y contenido para el estudio Icon Digital.</p>
       </a>
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/tia_pote_links/" data-process="Link-in-bio con catálogo y pedidos por WhatsApp. Quería que cargue al toque desde el feed de Instagram y que entre entero en una pantalla de celular." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/tia_pote_links/" data-process="Link-in-bio con catálogo y pedidos por WhatsApp. Quería que cargue al toque desde el feed de Instagram y que entre entero en una pantalla de celular." data-process-en="Link-in-bio with a catalog and WhatsApp ordering. I wanted it to load instantly from the Instagram feed and fit entirely on one phone screen." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/tiapote.jpg" alt="Link-in-bio de Tía Pote" loading="lazy"></div>
         <h4>Tía Pote</h4>
-        <p>Link-in-bio para pastelería moderna: pedidos, consultas y redes en un solo lugar.</p>
+        <p data-i18n="proj.tiapote.idx">Link-in-bio para pastelería moderna: pedidos, consultas y redes en un solo lugar.</p>
       </a>
-      <a class="grid-card reveal" href="https://adsudo1990.github.io/ferias-rauch/" data-process="Link-in-bio para una consignataria de hacienda: sucursales, remates y contacto directo. Misma lógica que Tía Pote: liviano, pensado para el celular y sin vueltas." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://adsudo1990.github.io/ferias-rauch/" data-process="Link-in-bio para una consignataria de hacienda: sucursales, remates y contacto directo. Misma lógica que Tía Pote: liviano, pensado para el celular y sin vueltas." data-process-en="Link-in-bio for a livestock auction house: branches, auctions and direct contact. Same approach as Tía Pote: lightweight, mobile-first, no detours." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/feriasrauch.jpg" alt="Link-in-bio de Ferias Rauch" loading="lazy"></div>
         <h4>Ferias Rauch</h4>
-        <p>Link-in-bio para consignataria de hacienda: sucursales y contacto directo por WhatsApp.</p>
+        <p data-i18n="proj.feriasrauch.idx">Link-in-bio para consignataria de hacienda: sucursales y contacto directo por WhatsApp.</p>
       </a>
     </div>
 
     <div class="portfolio-sub reveal">
-      <p class="skill-tag">De mi Behance</p>
-      <h3 class="h3">Piezas y conceptos</h3>
+      <p class="skill-tag" data-i18n="pf.sub.tag">De mi Behance</p>
+      <h3 class="h3" data-i18n="pf.sub.h3">Piezas y conceptos</h3>
     </div>
     <div class="grid-cards grid-cards--behance reveal-group">
       <div class="grid-card grid-card--soon reveal">
-        <div class="grid-img grid-img--soon"><span>Próximamente</span></div>
-        <h4>Piezas gráficas &amp; arquigrafía</h4>
-        <p>Trabajo impreso real: cartelería, señalética y gráfica de punto de venta. Estoy subiendo las fotos a mi Behance.</p>
+        <div class="grid-img grid-img--soon"><span data-i18n="pf.soon.badge">Próximamente</span></div>
+        <h4 data-i18n="pf.soon.title">Piezas gráficas &amp; arquigrafía</h4>
+        <p data-i18n="pf.soon.desc">Trabajo impreso real: cartelería, señalética y gráfica de punto de venta. Estoy subiendo las fotos a mi Behance.</p>
       </div>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/91902907/Puma-Home_" data-process="Rediseño del home de e-commerce de Puma, hecho en Figma como ejercicio personal. Me interesaba la jerarquía tipográfica y quitar todo lo que sobra." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/91902907/Puma-Home_" data-process="Rediseño del home de e-commerce de Puma, hecho en Figma como ejercicio personal. Me interesaba la jerarquía tipográfica y quitar todo lo que sobra." data-process-en="Redesign of the Puma e-commerce homepage, made in Figma as a personal exercise. I was interested in typographic hierarchy and stripping away anything unnecessary." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-puma.jpg" alt="Concepto de home de e-commerce para Puma" loading="lazy"></div>
         <h4>Puma Home_</h4>
-        <p>Concepto de home minimalista para e-commerce de indumentaria deportiva.</p>
+        <p data-i18n="proj.puma.idx">Concepto de home minimalista para e-commerce de indumentaria deportiva.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/93493569/IrishBakers_" data-process="Landing conceptual para una panadería artesanal: identidad, tono de marca y pedido online. La idea era comunicar «artesanal» sin caer en el cliché de tipografía manuscrita y colores pastel." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/93493569/IrishBakers_" data-process="Landing conceptual para una panadería artesanal: identidad, tono de marca y pedido online. La idea era comunicar «artesanal» sin caer en el cliché de tipografía manuscrita y colores pastel." data-process-en="Concept landing page for an artisan bakery: identity, brand tone and online ordering. The idea was to communicate “artisan” without falling into the handwritten-font-and-pastel-colors cliché." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-irishbakers.jpg" alt="Landing de panadería IrishBakers" loading="lazy"></div>
         <h4>IrishBakers_</h4>
-        <p>Landing para panadería artesanal: identidad, pedido online y catálogo de productos.</p>
+        <p data-i18n="proj.irishbakers.idx">Landing para panadería artesanal: identidad, pedido online y catálogo de productos.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/97113945/Don-Raul_" data-process="Identidad de marca completa para una rotisería: isologo, paleta, aplicaciones y una web de pedidos. Quería que se sintiera de barrio y confiable, sin caer en lo genérico." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/97113945/Don-Raul_" data-process="Identidad de marca completa para una rotisería: isologo, paleta, aplicaciones y una web de pedidos. Quería que se sintiera de barrio y confiable, sin caer en lo genérico." data-process-en="Full brand identity for a rotisería (local deli): logo, palette, applications and an ordering site. I wanted it to feel neighborhood-trustworthy, not generic." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-donraul.jpg" alt="Branding y web de rotisería Don Raúl" loading="lazy"></div>
         <h4>Don Raúl</h4>
-        <p>Identidad de marca y web de pedidos para una rotisería.</p>
+        <p data-i18n="proj.donraul.idx">Identidad de marca y web de pedidos para una rotisería.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/135656613/Electric_A" data-process="Render 3D en Blender y Cinema 4D para practicar tipografía, materiales e iluminación. Lo hice para mí, no fue un encargo." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/135656613/Electric_A" data-process="Render 3D en Blender y Cinema 4D para practicar tipografía, materiales e iluminación. Lo hice para mí, no fue un encargo." data-process-en="3D render in Blender and Cinema 4D to practice typography, materials and lighting. I made it for myself, not a client job." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-electric.jpg" alt="Pieza 3D Electric_A" loading="lazy"></div>
         <h4>Electric_A</h4>
-        <p>Render 3D para probar tipografía e iluminación.</p>
+        <p data-i18n="proj.electric.idx">Render 3D para probar tipografía e iluminación.</p>
       </a>
-      <a class="grid-card reveal" href="https://www.behance.net/gallery/179624189/_socialmedia" data-process="Piezas de redes para Kawasaki Navarro, SYM y UnoMotos, semana a semana. Cada flyer sale en horas, así que armar un buen sistema de plantillas pesó tanto como el diseño." target="_blank" rel="noopener">
+      <a class="grid-card reveal" href="https://www.behance.net/gallery/179624189/_socialmedia" data-process="Piezas de redes para Kawasaki Navarro, SYM y UnoMotos, semana a semana. Cada flyer sale en horas, así que armar un buen sistema de plantillas pesó tanto como el diseño." data-process-en="Social media pieces for Kawasaki Navarro, SYM and UnoMotos, week after week. Each flyer ships in hours, so building a solid template system mattered as much as the design itself." target="_blank" rel="noopener">
         <div class="grid-img"><img src="assets/img/behance-socialmedia.jpg" alt="Flyers de redes sociales para Kawasaki Navarro, SYM y UnoMotos" loading="lazy"></div>
         <h4>_social.media</h4>
-        <p>Flyers y piezas para redes de Kawasaki Navarro, SYM y UnoMotos.</p>
+        <p data-i18n="proj.socialmedia.idx">Flyers y piezas para redes de Kawasaki Navarro, SYM y UnoMotos.</p>
       </a>
-      <a class="grid-card grid-card--video reveal" href="https://www.behance.net/gallery/144928817/Videos_variosae" data-process="Reel de edición para piezas de redes: motion graphics, cortes al ritmo y corrección de color, en After Effects y Premiere." target="_blank" rel="noopener">
+      <a class="grid-card grid-card--video reveal" href="https://www.behance.net/gallery/144928817/Videos_variosae" data-process="Reel de edición para piezas de redes: motion graphics, cortes al ritmo y corrección de color, en After Effects y Premiere." data-process-en="Editing reel for social media pieces: motion graphics, rhythm cuts and color correction, done in After Effects and Premiere." target="_blank" rel="noopener">
         <div class="grid-img grid-img--video">
           <span class="play-btn" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5z" fill="currentColor"/></svg>
           </span>
         </div>
         <h4>_videos</h4>
-        <p>Reel de edición: motion, cortes y color para piezas de redes.</p>
+        <p data-i18n="proj.videos.idx">Reel de edición: motion, cortes y color para piezas de redes.</p>
       </a>
     </div>
   </div>
@@ -326,18 +341,18 @@
 <section class="section section-alt" id="3d">
   <div class="wrap threed-grid reveal-group">
     <div class="reveal">
-      <p class="eyebrow">/ Proyecto personal</p>
-      <h2 class="h2">3D <span class="accent-text">como hobby</span></h2>
-      <p class="about-text">
+      <p class="eyebrow" data-i18n="d3.eyebrow">/ Proyecto personal</p>
+      <h2 class="h2" data-i18n="d3.h2">3D <span class="accent-text">como hobby</span></h2>
+      <p class="about-text" data-i18n="d3.text">
         Por fuera del trabajo vengo metiéndome en modelado y texturizado de personajes con ZBrush y
         Substance Painter. Todavía es un juego más que un servicio, pero el proceso de cada
         pieza lo voy subiendo a mi Behance.
       </p>
-      <a href="https://www.behance.net/svdgw" target="_blank" rel="noopener" class="btn btn-outline">Ver el proceso en Behance ↗</a>
+      <a href="https://www.behance.net/svdgw" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="d3.cta">Ver el proceso en Behance ↗</a>
     </div>
     <div class="threed-note reveal">
-      <p class="skill-tag">En desarrollo</p>
-      <p>La estoy armando de a poco. Voy a ir subiendo capturas del proceso a medida que termino piezas.</p>
+      <p class="skill-tag" data-i18n="d3.note.tag">En desarrollo</p>
+      <p data-i18n="d3.note.text">La estoy armando de a poco. Voy a ir subiendo capturas del proceso a medida que termino piezas.</p>
     </div>
   </div>
 </section>
@@ -346,52 +361,52 @@
 <section class="section" id="experiencia">
   <div class="wrap">
     <div class="reveal-group">
-      <p class="eyebrow reveal">/ Trayectoria</p>
-      <h2 class="h2 reveal">Mi <span class="accent-text">experiencia</span></h2>
+      <p class="eyebrow reveal" data-i18n="ex.eyebrow">/ Trayectoria</p>
+      <h2 class="h2 reveal" data-i18n="ex.h2">Mi <span class="accent-text">experiencia</span></h2>
     </div>
 
     <div class="timeline reveal-group">
       <div class="timeline-item reveal">
         <div class="timeline-main">
-          <h4>Diseñador Gráfico y Web Freelance</h4>
-          <p class="timeline-company">Trabajo independiente — Workana, Fiverr, contacto directo</p>
+          <h4 data-i18n="ex.job1.title">Diseñador Gráfico y Web Freelance</h4>
+          <p class="timeline-company" data-i18n="ex.job1.company">Trabajo independiente — Workana, Fiverr, contacto directo</p>
         </div>
-        <span class="timeline-date">2012 — Presente</span>
+        <span class="timeline-date" data-i18n="ex.job1.date">2012 — Presente</span>
       </div>
       <div class="timeline-item fade-1 reveal">
         <div class="timeline-main">
-          <h4>Diseñador Gráfico</h4>
+          <h4 data-i18n="ex.job2.title">Diseñador Gráfico</h4>
           <p class="timeline-company">Kawasaki Navarro</p>
         </div>
-        <span class="timeline-date">Jun. 2021 — Ago. 2026</span>
+        <span class="timeline-date" data-i18n="ex.job2.date">Jun. 2021 — Ago. 2026</span>
       </div>
       <div class="timeline-item fade-2 reveal">
         <div class="timeline-main">
-          <h4>Diseñador Gráfico / Web / UX-UI</h4>
+          <h4 data-i18n="ex.job3.title">Diseñador Gráfico / Web / UX-UI</h4>
           <p class="timeline-company">UnoMotos</p>
         </div>
-        <span class="timeline-date">Ago. 2020 — Ago. 2026</span>
+        <span class="timeline-date" data-i18n="ex.job3.date">Ago. 2020 — Ago. 2026</span>
       </div>
       <div class="timeline-item fade-3 reveal">
         <div class="timeline-main">
-          <h4>Diseñador Gráfico / Web</h4>
+          <h4 data-i18n="ex.job4.title">Diseñador Gráfico / Web</h4>
           <p class="timeline-company">Imagic (Imarket Srl.)</p>
         </div>
-        <span class="timeline-date">Ago. 2016 — Jul. 2020</span>
+        <span class="timeline-date" data-i18n="ex.job4.date">Ago. 2016 — Jul. 2020</span>
       </div>
       <div class="timeline-item fade-4 reveal">
         <div class="timeline-main">
-          <h4>Diseñador Gráfico / Web</h4>
+          <h4 data-i18n="ex.job4.title">Diseñador Gráfico / Web</h4>
           <p class="timeline-company">Overhard Digital</p>
         </div>
-        <span class="timeline-date">Dic. 2015 — Jun. 2016</span>
+        <span class="timeline-date" data-i18n="ex.job5.date">Dic. 2015 — Jun. 2016</span>
       </div>
       <div class="timeline-item fade-5 reveal">
         <div class="timeline-main">
-          <h4>Diseñador Gráfico / Web</h4>
-          <p class="timeline-company">SoulFire — pasantía</p>
+          <h4 data-i18n="ex.job4.title">Diseñador Gráfico / Web</h4>
+          <p class="timeline-company" data-i18n="ex.job6.company">SoulFire — pasantía</p>
         </div>
-        <span class="timeline-date">Oct. — Dic. 2015</span>
+        <span class="timeline-date" data-i18n="ex.job6.date">Oct. — Dic. 2015</span>
       </div>
     </div>
   </div>
@@ -401,42 +416,42 @@
 <section class="section section-alt" id="contacto">
   <div class="wrap contact-grid">
     <div class="reveal-group">
-      <p class="eyebrow reveal">/ Contacto</p>
-      <h2 class="h2 reveal">Trabajemos <span class="accent-text">juntos</span></h2>
-      <p class="lead reveal">Contame de qué se trata y te respondo directo.</p>
+      <p class="eyebrow reveal" data-i18n="co.eyebrow">/ Contacto</p>
+      <h2 class="h2 reveal" data-i18n="co.h2">Trabajemos <span class="accent-text">juntos</span></h2>
+      <p class="lead reveal" data-i18n="co.lead">Contame de qué se trata y te respondo directo.</p>
 
       <form class="contact-form reveal" id="contactForm">
-        <label>
+        <label data-i18n="co.form.name.label">
           Tu nombre *
-          <input type="text" name="nombre" required placeholder="Nombre y apellido">
+          <input type="text" name="nombre" required placeholder="Nombre y apellido" data-i18n-placeholder="co.form.name.placeholder">
         </label>
-        <label>
+        <label data-i18n="co.form.email.label">
           Tu e-mail *
           <input type="email" name="email" required placeholder="mail@ejemplo.com">
         </label>
         <fieldset class="status-toggle">
-          <legend>Vos sos... *</legend>
-          <label class="radio"><input type="radio" name="status" value="Recluta talento (RRHH)" checked> Buscás talento (RRHH)</label>
-          <label class="radio"><input type="radio" name="status" value="Tiene un proyecto"> Tenés un proyecto freelance</label>
+          <legend data-i18n="co.form.status.legend">Vos sos... *</legend>
+          <label class="radio"><input type="radio" name="status" value="Recluta talento (RRHH)" checked> <span data-i18n="co.form.status.opt1">Buscás talento (RRHH)</span></label>
+          <label class="radio"><input type="radio" name="status" value="Tiene un proyecto"> <span data-i18n="co.form.status.opt2">Tenés un proyecto freelance</span></label>
         </fieldset>
-        <label>
+        <label data-i18n="co.form.message.label">
           Contame más *
-          <textarea name="mensaje" rows="4" required placeholder="¿De qué se trata? Rol, proyecto, presupuesto, cuando lo necesitás..."></textarea>
+          <textarea name="mensaje" rows="4" required placeholder="¿De qué se trata? Rol, proyecto, presupuesto, cuando lo necesitás..." data-i18n-placeholder="co.form.message.placeholder"></textarea>
         </label>
-        <button type="submit" class="btn btn-primary">Enviar mensaje →</button>
-        <p class="form-note">Te abre el mail con el mensaje ya escrito. Acá no se guarda nada.</p>
+        <button type="submit" class="btn btn-primary" data-i18n="co.form.submit">Enviar mensaje →</button>
+        <p class="form-note" data-i18n="co.form.note">Te abre el mail con el mensaje ya escrito. Acá no se guarda nada.</p>
       </form>
     </div>
 
     <div class="contact-side reveal">
-      <p class="skill-tag">Directo</p>
+      <p class="skill-tag" data-i18n="co.side.tag">Directo</p>
       <ul class="contact-links">
         <li><a href="mailto:sergio_visgarra@hotmail.com">sergio_visgarra@hotmail.com</a></li>
         <li><a href="https://ar.linkedin.com/in/sergio-visgarra" target="_blank" rel="noopener">LinkedIn ↗</a></li>
         <li><a href="https://github.com/adsudo1990" target="_blank" rel="noopener">GitHub ↗</a></li>
         <li><a href="https://www.behance.net/svdgw" target="_blank" rel="noopener">Behance ↗</a></li>
       </ul>
-      <p class="contact-avail">Puedo arrancar ya · Híbrido en CABA o 100% remoto</p>
+      <p class="contact-avail" data-i18n="co.avail">Puedo arrancar ya · Híbrido en CABA o 100% remoto</p>
     </div>
   </div>
 </section>
@@ -444,16 +459,16 @@
 <!-- ============ CIERRE (mismo efecto palabra por palabra que el statement) ============ -->
 <section class="statement statement--cta">
   <div class="wrap">
-    <p class="statement-text word-reveal">Creemos algo juntos.</p>
+    <p class="statement-text word-reveal" data-i18n="ct2.text">Creemos algo juntos.</p>
   </div>
 </section>
 
 <!-- ============ CV DOWNLOAD ============ -->
 <section class="cv-band">
   <div class="wrap">
-    <p class="cv-band-title">¿Querés el CV en PDF?</p>
-    <p class="cv-band-note">La versión completa, para leer tranquilo o guardártela.</p>
-    <a class="btn btn-cv" href="https://sergio-cv.sergio-visgarra.workers.dev/cv" target="_blank" rel="noopener">Descargar CV en PDF</a>
+    <p class="cv-band-title" data-i18n="cv.title">¿Querés el CV en PDF?</p>
+    <p class="cv-band-note" data-i18n="cv.note">La versión completa, para leer tranquilo o guardártela.</p>
+    <a class="btn btn-cv" href="https://sergio-cv.sergio-visgarra.workers.dev/cv" target="_blank" rel="noopener" data-i18n="cv.btn">Descargar CV en PDF</a>
   </div>
 </section>
 
@@ -461,8 +476,8 @@
 <footer class="footer">
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>Disponible para nuevos proyectos ✳ Disponible para nuevos proyectos ✳ Disponible para nuevos proyectos ✳ Disponible para nuevos proyectos ✳ </span>
-      <span>Disponible para nuevos proyectos ✳ Disponible para nuevos proyectos ✳ Disponible para nuevos proyectos ✳ Disponible para nuevos proyectos ✳ </span>
+      <span>Diseño Gráfico <span class="marquee-sep">//</span> Diseño Web <span class="marquee-sep">//</span> UX/UI <span class="marquee-sep">//</span> Motion &amp; 3D <span class="marquee-sep">//</span> IA Generativa <span class="marquee-sep">//</span> Branding <span class="marquee-sep">//</span> Arquigrafía <span class="marquee-sep">//</span> </span>
+      <span>Diseño Gráfico <span class="marquee-sep">//</span> Diseño Web <span class="marquee-sep">//</span> UX/UI <span class="marquee-sep">//</span> Motion &amp; 3D <span class="marquee-sep">//</span> IA Generativa <span class="marquee-sep">//</span> Branding <span class="marquee-sep">//</span> Arquigrafía <span class="marquee-sep">//</span> </span>
     </div>
   </div>
   <div class="wrap footer-bottom">
@@ -485,7 +500,7 @@
       <p class="skill-tag" id="projectModalTag" hidden></p>
       <h3 id="projectModalTitle"></h3>
       <p id="projectModalDesc"></p>
-      <a id="projectModalLink" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver en vivo ↗</a>
+      <a id="projectModalLink" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm" data-i18n="md.viewlive">Ver en vivo ↗</a>
     </div>
   </div>
 </div>
@@ -496,10 +511,10 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 4L21 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
   <a href="#skills" class="dock-item" data-section="skills">Skills</a>
-  <a href="#sobre-mi" class="dock-item" data-section="sobre-mi">Sobre mí</a>
+  <a href="#sobre-mi" class="dock-item" data-section="sobre-mi" data-i18n="dk.about">Sobre mí</a>
   <a href="#portfolio" class="dock-item" data-section="portfolio">Portfolio</a>
-  <a href="#experiencia" class="dock-item" data-section="experiencia">Experiencia</a>
-  <a href="#contacto" class="dock-item dock-cta">Contactar</a>
+  <a href="#experiencia" class="dock-item" data-section="experiencia" data-i18n="dk.experience">Experiencia</a>
+  <a href="#contacto" class="dock-item dock-cta" data-i18n="dk.contact">Contactar</a>
 </nav>
 
 </div><!-- /.site-content -->
@@ -508,6 +523,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="js/background.js?v=5"></script>
-<script src="js/main.js?v=20"></script>
+<script src="js/i18n.js?v=1"></script>
+<script src="js/main.js?v=21"></script>
 </body>
 </html>
