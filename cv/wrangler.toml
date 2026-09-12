@@ -1,0 +1,14 @@
+name = "sergio-cv"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Contador de aperturas del CV (se crea con "wrangler kv namespace create CV_STATS",
+# después pegás el id que te devuelva acá abajo)
+[[kv_namespaces]]
+binding = "CV_STATS"
+id = "REEMPLAZAR_CON_TU_KV_ID"
+
+# Bucket donde vive el PDF (se crea con "wrangler r2 bucket create sergio-cv")
+[[r2_buckets]]
+binding = "CV_BUCKET"
+bucket_name = "sergio-cv"

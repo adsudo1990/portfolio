@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sergio Visgarra — CV Técnico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#101a24;
+    --panel:#101a24;
+    --line:#2c3d4c;
+    --ink:#eef3f6;
+    --ink-soft:#aebdc9;
+    --ink-faint:#7c8d9a;
+    --accent:#35dcc6;
+    --bar-bg:#22323f;
+    --bar-fill:#e7edf1;
+    --chip-bg:#1a2733;
+    --chip-line:#31465570;
+    --font-head:'Fira Sans', sans-serif;
+    --font-body:'Inter', sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#0b1219; }
+  body{ font-family:var(--font-body); color:var(--ink); -webkit-font-smoothing:antialiased; }
+
+  /* ============ A4 PAGE ============ */
+  .page{
+    width:210mm;
+    height:297mm;
+    margin:24px auto;
+    background:var(--bg);
+    box-shadow:0 8px 40px rgba(0,0,0,.5);
+    padding:11mm 12mm 9mm;
+    position:relative;
+  }
+  @media print{
+    body{ background:#0b1219; }
+    .page{ margin:0; box-shadow:none; width:210mm; min-height:297mm; }
+    @page{ size:A4; margin:0; }
+  }
+
+  /* ============ HEADER ============ */
+  .header{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+  }
+  .header-mark{
+    width:52px; height:52px;
+    border-radius:50%;
+    background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    flex:none;
+    box-shadow:0 2px 10px rgba(0,0,0,.35);
+  }
+  .header-mark img{ width:66%; height:66%; object-fit:contain; }
+  .header-id{ flex:1; min-width:0; }
+  .header-id h1{
+    font-family:var(--font-head);
+    font-weight:800;
+    font-size:22px;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    margin:0 0 2px;
+    color:var(--ink);
+  }
+  .header-role{
+    font-size:11px;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 5px;
+    letter-spacing:.01em;
+  }
+  .header-badge{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:8.6px;
+    font-weight:600;
+    color:#0b1219;
+    background:var(--accent);
+    padding:2.5px 8px;
+    border-radius:20px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .header-contact{
+    text-align:right;
+    font-size:8.8px;
+    color:var(--ink-soft);
+    line-height:1.55;
+    flex:none;
+    white-space:nowrap;
+  }
+  .header-contact strong{ color:var(--ink); font-weight:600; }
+
+  /* ============ LAYOUT ============ */
+  .body-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 22px;
+    margin-top:12px;
+  }
+  .col{ position:relative; }
+  /* spine line running through each column's icon column */
+  .col::before{
+    content:'';
+    position:absolute;
+    left:10px; top:5px; bottom:5px;
+    width:1px;
+    background:var(--line);
+  }
+
+  .sec{ position:relative; padding-left:32px; margin-bottom:11px; }
+  .sec-icon{
+    position:absolute; left:0; top:-1px;
+    width:21px; height:21px;
+    border-radius:50%;
+    border:1.4px solid var(--accent);
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    z-index:1;
+  }
+  .sec-icon svg{ width:10px; height:10px; stroke:var(--accent); fill:none; }
+  .sec h2{
+    font-family:var(--font-head);
+    font-weight:800;
+    font-size:11.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin:1px 0 6px;
+    color:var(--ink);
+  }
+  .sec-body p{ margin:0 0 6px; font-size:9.3px; line-height:1.44; color:var(--ink-soft); }
+
+  /* ---- about ---- */
+  .about p{ margin:0 0 6px; }
+  .about .links{ font-size:8.6px; color:var(--ink-faint); margin-top:4px; }
+  .about .links a{ color:var(--ink-faint); }
+
+  /* ---- experience ---- */
+  .job{ margin-bottom:8px; }
+  .job:last-child{ margin-bottom:0; }
+  .job-top{ display:flex; justify-content:space-between; align-items:baseline; gap:8px; flex-wrap:wrap; }
+  .job-title{ font-family:var(--font-head); font-weight:700; font-size:10px; color:var(--ink); }
+  .job-date{ font-size:8.2px; color:var(--accent); font-style:italic; white-space:nowrap; }
+  .job-company{ font-size:8.8px; color:var(--ink-faint); margin:0 0 3px; font-style:italic; }
+  .job ul{ margin:0; padding-left:13px; }
+  .job li{ font-size:8.7px; line-height:1.4; color:var(--ink-soft); margin-bottom:1.5px; }
+
+  /* ---- education ---- */
+  .edu-item{ margin-bottom:7px; }
+  .edu-item:last-child{ margin-bottom:0; }
+  .edu-date{ font-size:8.2px; color:var(--accent); font-style:italic; }
+  .edu-school{ font-family:var(--font-head); font-weight:700; font-size:9.6px; color:var(--ink); margin:1px 0; }
+  .edu-degree{ font-size:8.8px; color:var(--ink-soft); }
+
+  /* ---- tools / skill bars ---- */
+  .skill-row{ margin-bottom:5px; }
+  .skill-row:last-child{ margin-bottom:0; }
+  .skill-label{ display:flex; justify-content:space-between; font-size:8.8px; color:var(--ink-soft); margin-bottom:2px; }
+  .skill-label b{ color:var(--ink); font-weight:600; }
+  .skill-bar{ height:4px; border-radius:3px; background:var(--bar-bg); overflow:hidden; }
+  .skill-bar span{ display:block; height:100%; background:var(--bar-fill); border-radius:3px; }
+  .skill-group-gap{ margin-top:8px; }
+  .skill-group-title{ font-size:8.2px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin:0 0 5px; }
+
+  /* ---- specialties chips ---- */
+  .chips{ display:flex; flex-wrap:wrap; gap:5px; }
+  .chip{
+    font-size:8.4px;
+    color:var(--ink-soft);
+    background:var(--chip-bg);
+    border:1px solid var(--chip-line);
+    padding:3px 8px;
+    border-radius:5px;
+    line-height:1.3;
+  }
+
+  /* ---- disponibilidad ---- */
+  .avail-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; }
+  .avail-item b{ display:block; font-size:8.2px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-faint); margin-bottom:1px; }
+  .avail-item span{ font-size:8.8px; color:var(--ink-soft); }
+
+  /* ============ FOOTER ============ */
+  .footer{
+    position:absolute;
+    left:12mm; right:12mm; bottom:9mm;
+    padding-top:8px;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:8.4px;
+    color:var(--ink-faint);
+  }
+  .footer a{ color:var(--accent); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header-mark"><img src="../assets/favicon.png" alt="Marca Sergio Visgarra"></div>
+    <div class="header-id">
+      <h1>Sergio Visgarra</h1>
+      <p class="header-role">Diseñador Digital</p>
+      <span class="header-badge">Abierto a nuevas oportunidades</span>
+    </div>
+    <div class="header-contact">
+      <strong>sergio_visgarra@hotmail.com</strong><br>
+      linkedin.com/in/sergio-visgarra · behance.net/svdgw<br>
+      github.com/adsudo1990
+    </div>
+  </header>
+
+  <!-- ============ BODY ============ -->
+  <div class="body-grid">
+
+    <!-- ================= LEFT COLUMN ================= -->
+    <div class="col">
+
+      <section class="sec about">
+        <span class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c1.2-4 4-6 7-6s5.8 2 7 6"/></svg></span>
+        <h2>Acerca de mí</h2>
+        <div class="sec-body">
+          <p>Diseñador Gráfico, Web y UX/UI de Buenos Aires, con 14 años de trayectoria y foco técnico en piezas listas para producción: gráfica impresa, arquigrafía, identidad de marca y señalética de punto de venta, además de diseño web, UX/UI y motion/3D.</p>
+          <p>Desde 2012 trabajo en paralelo como freelance para clientes de Argentina y del exterior (Workana, Fiverr, contacto directo), combinado hasta agosto de 2026 con roles en relación de dependencia para un grupo concesionario de motos. Uso IA generativa (ChatGPT, Nano Banana, Google Flow) como parte del flujo diario de producción.</p>
+          <div class="links">Disponibilidad inmediata · Modalidad híbrida o 100% remota · Jornada completa o contrato</div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M3 7h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+        <h2>Experiencia laboral</h2>
+        <div class="sec-body">
+
+          <div class="job">
+            <div class="job-top">
+              <span class="job-title">Diseñador Gráfico y Web Freelance</span>
+              <span class="job-date">2012 — Presente</span>
+            </div>
+            <p class="job-company">Trabajo independiente · Workana, Fiverr, contacto directo</p>
+            <ul>
+              <li>Piezas gráficas impresas listas para imprimir: folletería, stickers, cartelería y arquigrafía para pymes y marcas de Latinoamérica.</li>
+              <li>Identidad de marca completa: diseño de logos, paleta cromática y aplicaciones de branding.</li>
+              <li>Piezas de merchandising y señalética para puntos de venta.</li>
+              <li>Sitios web, landing pages y catálogos online con pedidos por WhatsApp.</li>
+              <li>Montajes y visualizaciones 3D (Blender, Cinema 4D) de stands y espacios comerciales.</li>
+              <li>Uso diario de IA generativa (ChatGPT, Nano Banana, Google Flow) para acelerar diseño, copy e imágenes.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-top">
+              <span class="job-title">Diseñador Gráfico / Web / UX-UI</span>
+              <span class="job-date">Ago. 2020 — Ago. 2026</span>
+            </div>
+            <p class="job-company">UnoMotos — Concesionario oficial multimarca</p>
+            <ul>
+              <li>Diseño gráfico, web y UX/UI: piezas de venta, catálogo online y contenido de campañas.</li>
+              <li>Liderazgo de equipo de hasta 6 personas, con 2 a cargo directo (Ads Trafficker y editor audiovisual).</li>
+              <li>Gestión y planificación de campañas de Google Ads y Meta Ads.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-top">
+              <span class="job-title">Diseñador Gráfico</span>
+              <span class="job-date">Jun. 2021 — Ago. 2026</span>
+            </div>
+            <p class="job-company">Kawasaki Navarro</p>
+            <ul>
+              <li>Piezas de comunicación interna y externa: promociones, campañas y contenido para redes y punto de venta.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-top">
+              <span class="job-title">Diseñador Gráfico / Web</span>
+              <span class="job-date">Ago. 2016 — Jul. 2020</span>
+            </div>
+            <p class="job-company">Imagic (Imarket Srl.)</p>
+            <ul>
+              <li>Diseño para e-commerce en MercadoLibre y MercadoShops: publicaciones de producto, banners, flyers y tarjetas promocionales.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-top">
+              <span class="job-title">Diseñador Gráfico / Web</span>
+              <span class="job-date">Dic. 2015 — Jun. 2016</span>
+            </div>
+            <p class="job-company">Overhard Digital</p>
+            <ul>
+              <li>Plantillas HTML, piezas promocionales, campañas de redes, newsletters y packaging de producto.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-top">
+              <span class="job-title">Diseñador Gráfico / Web — Pasantía</span>
+              <span class="job-date">Oct. — Dic. 2015</span>
+            </div>
+            <p class="job-company">SoulFire — Agencia de publicidad</p>
+            <ul>
+              <li>Contacto con clientes del exterior, armado de sitios en WordPress e ideación de conceptos de campaña.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="sec">
+        <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5-10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/></svg></span>
+        <h2>Educación</h2>
+        <div class="sec-body">
+          <div class="edu-item">
+            <div class="edu-date">2013 — 2014</div>
+            <div class="edu-school">Universidad de Palermo</div>
+            <div class="edu-degree">Creativo Publicitario</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-date">2011 — 2013</div>
+            <div class="edu-school">Universidad de Palermo</div>
+            <div class="edu-degree">Diseñador Gráfico</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-date">2019</div>
+            <div class="edu-school">CoderHouse</div>
+            <div class="edu-degree">Diseñador UX/UI</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ================= RIGHT COLUMN ================= -->
+    <div class="col">
+
+      <section class="sec">
+        <span class="sec-icon"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg></span>
+        <h2>Herramientas de diseño</h2>
+        <div class="sec-body">
+          <div class="skill-row"><div class="skill-label"><b>Adobe Photoshop</b></div><div class="skill-bar"><span style="width:95%"></span></div></div>
+          <div class="skill-row"><div class="skill-label"><b>Adobe Illustrator</b></div><div class="skill-bar"><span style="width:92%"></span></div></div>
+          <div class="skill-row"><div class="skill-label"><b>Figma / Canva</b></div><div class="skill-bar"><span style="width:85%"></span></div></div>
+          <div class="skill-row"><div class="skill-label"><b>WordPress / Bootstrap</b></div><div class="skill-bar"><span style="width:82%"></span></div></div>
+          <div class="skill-row"><div class="skill-label"><b>After Effects / Premiere / CapCut</b></div><div class="skill-bar"><span style="width:75%"></span></div></div>
+          <div class="skill-row"><div class="skill-label"><b>Cinema 4D / Blender</b></div><div class="skill-bar"><span style="width:68%"></span></div></div>
+          <div class="skill-row"><div class="skill-label"><b>Sublime Text / VS Code</b></div><div class="skill-bar"><span style="width:78%"></span></div></div>
+
+          <div class="skill-group-gap">
+            <p class="skill-group-title">IA Generativa</p>
+            <div class="skill-row"><div class="skill-label"><b>ChatGPT</b></div><div class="skill-bar"><span style="width:90%"></span></div></div>
+            <div class="skill-row"><div class="skill-label"><b>Claude</b></div><div class="skill-bar"><span style="width:88%"></span></div></div>
+            <div class="skill-row"><div class="skill-label"><b>Nano Banana</b></div><div class="skill-bar"><span style="width:80%"></span></div></div>
+            <div class="skill-row"><div class="skill-label"><b>Vibecoding</b></div><div class="skill-bar"><span style="width:75%"></span></div></div>
+            <div class="skill-row"><div class="skill-label"><b>Google Flow (video)</b></div><div class="skill-bar"><span style="width:65%"></span></div></div>
+          </div>
+
+          <div class="skill-group-gap">
+            <p class="skill-group-title">3D — proyecto personal</p>
+            <div class="skill-row"><div class="skill-label"><b>ZBrush / Substance Painter</b></div><div class="skill-bar"><span style="width:45%"></span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></span>
+        <h2>Especialidades</h2>
+        <div class="sec-body">
+          <div class="chips">
+            <span class="chip">Piezas impresas listas para imprimir</span>
+            <span class="chip">Arquigrafía</span>
+            <span class="chip">Diseño de logos</span>
+            <span class="chip">Branding general</span>
+            <span class="chip">Merchandising</span>
+            <span class="chip">Señalética de punto de venta</span>
+            <span class="chip">Diseño web &amp; landing pages</span>
+            <span class="chip">UX/UI</span>
+            <span class="chip">Motion &amp; 3D</span>
+            <span class="chip">IA generativa aplicada al diseño</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <span class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        <h2>Disponibilidad</h2>
+        <div class="sec-body">
+          <div class="avail-grid">
+            <div class="avail-item"><b>Inicio</b><span>Inmediato</span></div>
+            <div class="avail-item"><b>Modalidad</b><span>Híbrida o remota</span></div>
+            <div class="avail-item"><b>Contratación</b><span>Full-time o contrato</span></div>
+            <div class="avail-item"><b>Ubicación</b><span>Buenos Aires, Argentina</span></div>
+            <div class="avail-item"><b>Inglés</b><span>Nivel medio</span></div>
+            <div class="avail-item"><b>Idioma nativo</b><span>Español</span></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <span>Portfolio completo en <a href="https://www.behance.net/svdgw">behance.net/svdgw</a> · Proyectos en <a href="https://github.com/adsudo1990">github.com/adsudo1990</a></span>
+    <span>CV técnico · 2026</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

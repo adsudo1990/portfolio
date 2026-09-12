@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================================================
+     TODO antes de subir a Cloudflare:
+     1) Reemplazar CANONICAL_URL por la URL real de ESTA página
+        (ej: https://cv.sergiovisgarra.com/ o la que te dé Cloudflare Pages).
+     2) Reemplazar PDF_URL por la URL real del PDF una vez subido
+        (mismo dominio o R2/Drive — puede ser distinta del canonical).
+     3) Si subís el PDF a un R2 bucket público, la URL directa
+        sirve igual para el botón de descarga y para el <iframe>.
+     ============================================================ -->
+
+<title>Sergio Visgarra — CV Diseñador Gráfico, Web y UX/UI</title>
+<meta name="description" content="Currículum de Sergio Visgarra: Diseñador Gráfico, Web y UX/UI con 14 años de trayectoria. Piezas gráficas, arquigrafía, branding, diseño web y UX/UI, con IA generativa en el flujo de trabajo diario. Abierto a nuevas oportunidades.">
+<link rel="canonical" href="CANONICAL_URL">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/png" href="https://adsudo1990.github.io/portfolio/assets/favicon.png">
+
+<!-- Open Graph / Twitter Card: la vista previa al compartir el link -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Sergio Visgarra — CV Diseñador Gráfico, Web y UX/UI">
+<meta property="og:description" content="14 años de trayectoria en diseño gráfico, web y UX/UI. Piezas listas para imprimir, arquigrafía, branding, merchandising e IA generativa aplicada al diseño.">
+<meta property="og:image" content="https://adsudo1990.github.io/portfolio/assets/img/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="CANONICAL_URL">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sergio Visgarra — CV Diseñador Gráfico, Web y UX/UI">
+<meta name="twitter:description" content="14 años de trayectoria en diseño gráfico, web y UX/UI. Piezas listas para imprimir, arquigrafía, branding, merchandising e IA generativa aplicada al diseño.">
+<meta name="twitter:image" content="https://adsudo1990.github.io/portfolio/assets/img/og-cover.png">
+
+<!-- Schema.org: le da a Google/LinkedIn/buscadores con IA una lectura
+     estructurada de quién es Sergio y de que este documento es su CV,
+     no solo un PDF suelto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Sergio Visgarra",
+    "jobTitle": "Diseñador Gráfico, Web y UX/UI",
+    "url": "https://adsudo1990.github.io/portfolio/",
+    "image": "https://adsudo1990.github.io/portfolio/assets/img/og-cover.png",
+    "address": { "@type": "PostalAddress", "addressLocality": "Buenos Aires", "addressCountry": "AR" },
+    "email": "mailto:sergio_visgarra@hotmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/sergio-visgarra",
+      "https://github.com/adsudo1990",
+      "https://www.behance.net/svdgw"
+    ],
+    "knowsAbout": [
+      "Diseño Gráfico", "Diseño Web", "UX/UI", "Arquigrafía", "Branding",
+      "Merchandising", "Motion", "3D", "IA Generativa"
+    ]
+  },
+  "significantLink": "PDF_URL"
+}
+</script>
+
+<style>
+  :root{
+    --bg:#101a24; --ink:#eef3f6; --ink-soft:#aebdc9; --ink-faint:#7c8d9a;
+    --accent:#35dcc6; --line:#2c3d4c; --panel:#16212c;
+    --font-head:'Fira Sans', sans-serif; --font-body:'Inter', sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--font-body);
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    padding:40px 20px 60px;
+  }
+  .mark{
+    width:56px; height:56px; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+    box-shadow:0 2px 14px rgba(0,0,0,.4);
+  }
+  .mark img{ width:64%; height:64%; object-fit:contain; }
+  h1{
+    font-family:var(--font-head); font-weight:800; font-size:clamp(1.5rem,4vw,2.2rem);
+    text-transform:uppercase; letter-spacing:.02em; margin:0 0 6px; text-align:center;
+  }
+  .role{ color:var(--accent); font-weight:600; font-size:.95rem; margin:0 0 26px; text-align:center; }
+  .actions{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-bottom:32px; }
+  .btn{
+    font-family:var(--font-body); font-weight:600; font-size:.9rem;
+    padding:12px 22px; border-radius:8px; text-decoration:none; transition:transform .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--accent); color:#0b1219; }
+  .btn-outline{ background:transparent; color:var(--ink); border:1px solid var(--line); }
+  .viewer{
+    width:100%; max-width:850px; aspect-ratio:210/297; background:var(--panel);
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    box-shadow:0 10px 40px rgba(0,0,0,.4);
+  }
+  .viewer iframe{ width:100%; height:100%; border:0; }
+  .fallback{
+    padding:40px; text-align:center; color:var(--ink-soft); font-size:.9rem;
+  }
+  .links{ margin-top:26px; font-size:.85rem; color:var(--ink-faint); }
+  .links a{ color:var(--ink-faint); }
+</style>
+</head>
+<body>
+
+  <div class="mark"><img src="https://adsudo1990.github.io/portfolio/assets/favicon.png" alt="Marca Sergio Visgarra"></div>
+  <h1>Sergio Visgarra</h1>
+  <p class="role">Diseñador Gráfico, Web y UX/UI · Abierto a nuevas oportunidades</p>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="PDF_URL" target="_blank" rel="noopener">Descargar CV (PDF)</a>
+    <a class="btn btn-outline" href="https://adsudo1990.github.io/portfolio/">Ver portfolio ↗</a>
+  </div>
+
+  <div class="viewer">
+    <iframe src="PDF_URL" title="CV de Sergio Visgarra">
+      <p class="fallback">Tu navegador no puede mostrar el PDF acá. <a href="PDF_URL">Descargalo directamente</a>.</p>
+    </iframe>
+  </div>
+
+  <p class="links">
+    LinkedIn: <a href="https://www.linkedin.com/in/sergio-visgarra">linkedin.com/in/sergio-visgarra</a> ·
+    Behance: <a href="https://www.behance.net/svdgw">behance.net/svdgw</a> ·
+    GitHub: <a href="https://github.com/adsudo1990">github.com/adsudo1990</a>
+  </p>
+
+  <!-- Cloudflare Web Analytics: pegá acá tu token una vez que crees el
+       sitio en el dashboard de Cloudflare (Analytics & Logs > Web Analytics
+       > Add a site > copiá el "beacon token", el string largo que va en
+       data-cf-beacon). Con esto ves visitas, países y referrers de quién
+       entra a esta página. Sin token, esta línea no hace nada. -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "TU_TOKEN_ACA"}'></script>
+
+</body>
+</html>
