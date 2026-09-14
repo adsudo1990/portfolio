@@ -3,25 +3,27 @@ const LANDING_HTML = `<!doctype html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sergio Visgarra — CV Diseñador Gráfico, Web y UX/UI</title>
-<meta name="description" content="Currículum de Sergio Visgarra: Diseñador Gráfico, Web y UX/UI con 14 años de trayectoria. Piezas gráficas, arquigrafía, branding, diseño web y UX/UI, con IA generativa en el flujo de trabajo diario.">
+<title>Sergio Visgarra / Diseñador Digital</title>
+<meta name="description" content="Curriculum vitae de Sergio Visgarra, Diseñador Digital de Buenos Aires con 14 años de trayectoria: diseño gráfico, arquigrafía, branding, diseño web, UX/UI y motion, con IA generativa en el flujo de trabajo diario. Descargá el CV en PDF.">
+<meta name="author" content="Sergio Visgarra">
+<meta name="keywords" content="Sergio Visgarra, Diseñador Digital, Diseñador Gráfico, Diseñador Web, Diseñador UX/UI, CV, Curriculum Vitae, Branding, Arquigrafía, IA Generativa, Buenos Aires">
 <link rel="canonical" href="https://sergio-cv.sergio-visgarra.workers.dev/">
 <meta name="robots" content="index, follow">
 <link rel="icon" type="image/png" href="https://adsudo1990.github.io/portfolio/assets/favicon.png">
 <meta property="og:type" content="profile">
-<meta property="og:title" content="Sergio Visgarra — CV Diseñador Gráfico, Web y UX/UI">
-<meta property="og:description" content="14 años de trayectoria en diseño gráfico, web y UX/UI. Piezas listas para imprimir, arquigrafía, branding, merchandising e IA generativa aplicada al diseño.">
+<meta property="og:title" content="Sergio Visgarra / Diseñador Digital">
+<meta property="og:description" content="14 años de trayectoria en diseño gráfico, web y UX/UI. Piezas listas para imprimir, arquigrafía, branding, merchandising e IA generativa aplicada al diseño. Descargá el CV en PDF.">
 <meta property="og:image" content="https://adsudo1990.github.io/portfolio/assets/img/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://sergio-cv.sergio-visgarra.workers.dev/">
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sergio Visgarra — CV Diseñador Gráfico, Web y UX/UI">
-<meta name="twitter:description" content="14 años de trayectoria en diseño gráfico, web y UX/UI. Piezas listas para imprimir, arquigrafía, branding, merchandising e IA generativa aplicada al diseño.">
+<meta name="twitter:title" content="Sergio Visgarra / Diseñador Digital">
+<meta name="twitter:description" content="14 años de trayectoria en diseño gráfico, web y UX/UI. Piezas listas para imprimir, arquigrafía, branding, merchandising e IA generativa aplicada al diseño. Descargá el CV en PDF.">
 <meta name="twitter:image" content="https://adsudo1990.github.io/portfolio/assets/img/og-cover.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Sergio Visgarra","jobTitle":"Diseñador Gráfico, Web y UX/UI","url":"https://adsudo1990.github.io/portfolio/","image":"https://adsudo1990.github.io/portfolio/assets/img/og-cover.png","address":{"@type":"PostalAddress","addressLocality":"Buenos Aires","addressCountry":"AR"},"email":"mailto:sergio_visgarra@hotmail.com","sameAs":["https://www.linkedin.com/in/sergio-visgarra","https://github.com/adsudo1990","https://www.behance.net/svdgw"],"knowsAbout":["Diseño Gráfico","Diseño Web","UX/UI","Arquigrafía","Branding","Merchandising","Motion","3D","IA Generativa"]}}
+{"@context":"https://schema.org","@type":"ProfilePage","name":"Sergio Visgarra / Diseñador Digital","url":"https://sergio-cv.sergio-visgarra.workers.dev/","mainEntity":{"@type":"Person","name":"Sergio Visgarra","jobTitle":"Diseñador Digital","description":"Diseñador Gráfico, Web y UX/UI con 14 años de trayectoria, especializado en piezas gráficas, arquigrafía, branding y diseño web con IA generativa aplicada al flujo de trabajo diario.","url":"https://adsudo1990.github.io/portfolio/","image":"https://adsudo1990.github.io/portfolio/assets/img/og-cover.png","address":{"@type":"PostalAddress","addressLocality":"Buenos Aires","addressCountry":"AR"},"email":"mailto:sergio_visgarra@hotmail.com","sameAs":["https://www.linkedin.com/in/sergio-visgarra","https://github.com/adsudo1990","https://www.behance.net/svdgw"],"knowsAbout":["Diseño Gráfico","Diseño Web","UX/UI","Arquigrafía","Branding","Merchandising","Motion","3D","IA Generativa"]},"significantLink":"https://sergio-cv.sergio-visgarra.workers.dev/cv"}
 </script>
 <style>
 :root{--bg:#101a24;--ink:#eef3f6;--ink-soft:#aebdc9;--ink-faint:#7c8d9a;--accent:#35dcc6;--line:#2c3d4c;--panel:#16212c;--font-head:'Fira Sans',sans-serif;--font-body:'Inter',sans-serif;}
@@ -41,11 +43,12 @@ h1{font-family:var(--font-head);font-weight:800;font-size:clamp(1.5rem,4vw,2.2re
 .viewer iframe{width:100%;height:100%;border:0;}
 .links{margin-top:26px;font-size:.85rem;color:var(--ink-faint);}
 .links a{color:var(--ink-faint);}
+.seo-text{max-width:600px;margin-top:22px;font-size:.8rem;line-height:1.6;color:var(--ink-faint);text-align:center;}
 </style>
 </head>
 <body>
 <div class="mark"><img src="https://adsudo1990.github.io/portfolio/assets/favicon.png" alt="Marca Sergio Visgarra"></div>
-<h1>Sergio Visgarra</h1>
+<h1>Sergio Visgarra / Diseñador Digital</h1>
 <p class="role">Diseñador Gráfico, Web y UX/UI · Abierto a nuevas oportunidades</p>
 <div class="actions">
 <a class="btn btn-primary" href="/cv" target="_blank" rel="noopener">Descargar CV (PDF)</a>
@@ -53,6 +56,7 @@ h1{font-family:var(--font-head);font-weight:800;font-size:clamp(1.5rem,4vw,2.2re
 </div>
 <div class="viewer"><iframe src="/cv" title="CV de Sergio Visgarra"></iframe></div>
 <p class="links">LinkedIn: <a href="https://www.linkedin.com/in/sergio-visgarra">linkedin.com/in/sergio-visgarra</a> · Behance: <a href="https://www.behance.net/svdgw">behance.net/svdgw</a> · GitHub: <a href="https://github.com/adsudo1990">github.com/adsudo1990</a></p>
+<p class="seo-text">Curriculum vitae de Sergio Visgarra, Diseñador Digital de Buenos Aires, Argentina, con 14 años de trayectoria en diseño gráfico, arquigrafía, branding, merchandising, diseño web, UX/UI y motion/3D, con IA generativa aplicada al día a día. Disponible para nuevos proyectos, en modalidad híbrida o 100% remota.</p>
 </body>
 </html>`;
 
