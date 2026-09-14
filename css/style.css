@@ -947,6 +947,7 @@ ul{ margin:0; padding:0; list-style:none; }
      con el texto. El scale(1.06) tapa los bordes que el blur deja translúcidos */
   filter:blur(1.6px);
   transform:scale(1.06);
+  will-change:transform;
 }
 /* un selector por ID le gana en especificidad al [hidden] del navegador
    (display:none) — mismo caso que .about-more[hidden] más arriba */

@@ -69,6 +69,8 @@ const I18N_DICT = {
   'pf.soon.badge': { es: 'Próximamente', en: 'Coming soon' },
   'pf.soon.title': { es: 'Piezas gráficas &amp; arquigrafía', en: 'Print pieces &amp; architectural graphics' },
   'pf.soon.desc': { es: 'Trabajo impreso real: cartelería, señalética y gráfica de punto de venta. Estoy subiendo las fotos a mi Behance.', en: 'Real printed work: signage and point-of-sale graphics. I’m uploading the photos to my Behance.' },
+  'pf.slot.title': { es: 'Nuevo proyecto', en: 'New project' },
+  'pf.slot.desc': { es: 'Estoy eligiendo qué trabajo sumar acá.', en: 'I’m choosing which piece to add here.' },
 
   'proj.puma.idx': { es: 'Concepto de home minimalista para e-commerce de indumentaria deportiva.', en: 'Minimalist homepage concept for a sportswear e-commerce site.' },
   'proj.puma.pf': { es: 'Concepto de home minimalista para e-commerce.', en: 'Minimalist e-commerce homepage concept.' },

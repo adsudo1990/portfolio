@@ -243,11 +243,17 @@
        proyectos apiladas (~3000px de alto, contra ~600-1000px del resto).
        rotateX(20deg) sobre un panel tan alto desplaza su borde superior
        más de 1000px durante el scrub inicial — eso era el "hay que
-       scrollear de más para llegar a Portfolio" ---- */
+       scrollear de más para llegar a Portfolio"
+     - .statement--cta: es el cierre, pegado al final de la página, sin
+       casi contenido debajo. El trigger "end: top 45%" no llega a cumplirse
+       nunca (no queda scroll suficiente para que su top pase del 45% del
+       viewport), así que el scrub se queda a mitad de camino — el texto
+       final quedaba semitransparente e inclinado en vez de completarse.
+       Se deja siempre visible, sin tilt. ---- */
   function initCardReveals() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     const cards = document.querySelectorAll(
-      '.section:not(#skills):not(#portfolio) > .wrap, .statement > .wrap, .page-header > .wrap'
+      '.section:not(#skills):not(#portfolio) > .wrap, .statement:not(.statement--cta) > .wrap, .page-header > .wrap'
     );
     cards.forEach((card) => {
       card.parentElement.style.perspective = '1200px';
