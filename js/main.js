@@ -103,8 +103,24 @@ if (backText) {
    sacar la foto del hero; el giro de la tarjeta queda como efecto independiente).
    El rango se define con `+=` y un mínimo garantizado. Con `end:'bottom bottom'`
    el rango colapsaba a 0 en ventanas más altas que la grilla (pantallas grandes),
-   y el giro no llegaba a ejecutarse nunca. */
-if (animationsEnabled && flipCard && skillsGrid) {
+   y el giro no llegaba a ejecutarse nunca.
+
+   Este scroll-scrub está pensado para el modo sticky (desktop, ver
+   .skills-layout en style.css): la tarjeta queda pegada arriba mientras se
+   gira a medida que se scrollea TODA la grilla de skills detrás.
+   En mobile (`@media max-width:900px`) la tarjeta deja de ser sticky y pasa
+   a ser un bloque más al final de la pila — pero seguía atada al mismo
+   scrub del alto completo de la grilla, que en mobile es mucho más alta
+   (6 tarjetas apiladas). Resultado: para cuando la tarjeta entraba en
+   pantalla el progreso de scroll ya estaba muy avanzado, así que aparecía
+   a mitad de giro, y el `scrub` (que suaviza/retrasa la interpolación)
+   hacía que un scroll rápido arriba/abajo la dejara visualmente "trabada"
+   a medio camino. Fix: en mobile el efecto pasa a ser un cross-fade único
+   entre las dos caras, disparado cuando la tarjeta misma entra en
+   pantalla — sin scrub, sin depender de un rango de scroll ajeno. */
+const isStickyVisual = window.matchMedia('(min-width: 901px)').matches;
+
+if (animationsEnabled && flipCard && skillsGrid && isStickyVisual) {
   if (hasGsap) {
     const flipST = {
       trigger: skillsGrid,
@@ -151,6 +167,30 @@ if (animationsEnabled && flipCard && skillsGrid) {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     render();
+  }
+} else if (flipCard && cardFront && cardBack) {
+  /* mobile/tablet (tarjeta no-sticky) o animaciones desactivadas del todo:
+     misma pinta final ("Trabajemos juntos" a la vista), sin scroll-scrub. */
+  flipCard.classList.add('is-flat');
+  if (backWords.length) backWords.forEach((w) => { w.style.opacity = '1'; });
+  cardFront.style.opacity = '1';
+  cardBack.style.opacity = '0';
+  if (animationsEnabled) {
+    const flipObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          cardFront.style.transition = 'opacity .6s ease';
+          cardBack.style.transition = 'opacity .6s ease';
+          cardFront.style.opacity = '0';
+          cardBack.style.opacity = '1';
+          flipObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.55 });
+    flipObserver.observe(flipCard);
+  } else {
+    cardFront.style.opacity = '0';
+    cardBack.style.opacity = '1';
   }
 }
 
