@@ -218,6 +218,12 @@ document.querySelectorAll('.word-reveal').forEach((textEl) => {
         end: () => '+=' + Math.max(420, textEl.offsetHeight + window.innerHeight * 0.2),
         scrub: 0.25,
         invalidateOnRefresh: true,
+        // el `scrub` suaviza con un pequeño retraso: si el scroll es rápido
+        // (flick en mobile, rueda del mouse), ese retraso no llega a alcanzar
+        // el valor final antes de soltar el scroll y las palabras quedaban a
+        // mitad de camino sin completarse. `fastScrollEnd` fuerza el salto al
+        // final cuando detecta scroll de alta velocidad.
+        fastScrollEnd: true,
       },
     });
   } else {

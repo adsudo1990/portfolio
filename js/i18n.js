@@ -8,7 +8,7 @@ const I18N_DICT = {
 
   'sk.eyebrow': { es: '/ Lo que hago', en: '/ What I do' },
   'sk.h2': { es: 'Áreas <span class="accent-text">de trabajo</span>', en: 'Areas <span class="accent-text">of work</span>' },
-  'sk.lead': { es: 'Hace 14 años que voy del diseño de una pieza gráfica al render de un stand comercial, con IA generativa en el medio todos los días.', en: 'For 14 years I’ve gone from designing a print piece to rendering a commercial stand, with generative AI in the mix every day.' },
+  'sk.lead': { es: 'Hace 14 años empecé en el mundo del diseño. Me gusta tomar un concepto y comunicarlo de distintas maneras creativas.', en: 'I started out in design 14 years ago. I like taking a concept and communicating it in different creative ways.' },
 
   'sk1.tag': { es: 'Punto de venta &amp; comunicación', en: 'Point of sale &amp; communication' },
   'sk1.title': { es: '01. Diseño Gráfico', en: '01. Graphic Design' },
@@ -21,24 +21,26 @@ const I18N_DICT = {
   'sk3.tag': { es: 'Prototipado', en: 'Prototyping' },
   'sk3.desc': { es: 'Dashboards y prototipos funcionales de apps, pensados desde el flujo real de uso.', en: 'Dashboards and functional app prototypes, designed around real usage flow.' },
 
-  'sk4.tag': { es: 'Montajes para retail', en: 'Retail visualizations' },
-  'sk4.desc': { es: 'Montajes y visualizaciones 3D de locales y stands comerciales, piezas audiovisuales y motion.', en: '3D visualizations of stores and commercial stands, plus audiovisual and motion pieces.' },
+  'sk4.tag': { es: 'Montaje para retail', en: 'Retail video editing' },
+  'sk4.title': { es: '04. Edición de Video', en: '04. Video Editing' },
+  'sk4.desc': { es: 'Crear piezas animadas con un gancho creativo en movimiento. Piezas audiovisuales para destacar.', en: 'Creating animated pieces with a creative hook in motion. Audiovisual pieces made to stand out.' },
 
   'sk5.tag': { es: 'Flujo diario', en: 'Daily workflow' },
-  'sk5.title': { es: '05. IA Generativa', en: '05. Generative AI' },
-  'sk5.desc': { es: 'Diseño y generación de imágenes y video con IA, como una herramienta más del día a día.', en: 'Design and image/video generation with AI, as just another everyday tool.' },
+  'sk5.title': { es: '05. IA Generativa / Vibecoding', en: '05. Generative AI / Vibecoding' },
+  'sk5.desc': { es: 'Utilizo la IA para la creación de videos, imágenes, conceptos o herramientas a medida para el cliente.', en: 'I use AI to create videos, images, concepts, or custom tools for the client.' },
 
   'sk6.tag': { es: 'Proyecto personal', en: 'Personal project' },
-  'sk6.desc': { es: 'Modelado y texturizado de personajes, como exploración personal fuera del trabajo diario.', en: 'Character modeling and texturing, a personal exploration outside daily work.' },
+  'sk6.title': { es: '06. Diseño 3D', en: '06. 3D Design' },
+  'sk6.desc': { es: 'Modelado y texturizado de personajes, como exploración personal e ingresando de manera autodidacta.', en: 'Character modeling and texturing, as personal exploration — getting into it on my own, self-taught.' },
 
   'sk.visual.role': { es: 'Diseñador Gráfico &amp; Web', en: 'Graphic &amp; Web Designer' },
   'sk.visual.back': { es: 'Trabajemos juntos', en: 'Let’s work together' },
 
-  'st.text': { es: 'Diseño para generar una mejor comunicación creativa en distintos rubros de Latinoamérica.', en: 'I design to build better creative communication across different industries in Latin America.' },
+  'st.text': { es: 'Diseño para generar una mejor comunicación creativa en distintos rubros.', en: 'I design to build better creative communication across different industries.' },
 
   'ab.eyebrow': { es: '/ Sobre mí', en: '/ About me' },
   'ab.h2': { es: 'Creativo <span class="accent-text">de fondo</span>', en: 'A creative <span class="accent-text">at heart</span>' },
-  'ab.text': { es: 'Ahora mismo ando metido en el diseño de personajes 3D y el vibecoding. Las uso para ayudar a pequeñas empresas a resolver el día a día, tanto en lo visual como en la forma de trabajar.', en: 'Right now I’m deep into 3D character design and vibecoding. I use them to help small businesses solve their day-to-day, both visually and in how they work.' },
+  'ab.text': { es: 'Utilizo también el Vibecoding para dar soluciones a emprendedores — apoyado en mis otros conocimientos, me abrió un mundo nuevo: crear piezas funcionales que les facilitan la rutina.', en: 'I also use Vibecoding to build solutions for entrepreneurs — combined with my other skills, it opened up a whole new world: creating functional pieces that make their day-to-day easier.' },
 
   'pf.eyebrow': { es: '/ Proyectos', en: '/ Projects' },
   'pf.h2': { es: 'Trabajo <span class="accent-text">seleccionado</span>', en: 'Selected <span class="accent-text">work</span>' },
@@ -97,7 +99,7 @@ const I18N_DICT = {
 
   'd3.eyebrow': { es: '/ Proyecto personal', en: '/ Personal project' },
   'd3.h2': { es: '3D <span class="accent-text">como hobby</span>', en: '3D <span class="accent-text">as a hobby</span>' },
-  'd3.text': { es: 'Por fuera del trabajo vengo metiéndome en modelado y texturizado de personajes con ZBrush y Substance Painter. Todavía es un juego más que un servicio, pero el proceso de cada pieza lo voy subiendo a mi Behance.', en: 'Outside of work I’ve been getting into character modeling and texturing with ZBrush and Substance Painter. It’s still more of a hobby than a service, but I’m uploading the process for each piece to my Behance.' },
+  'd3.text': { es: 'Siempre utilicé YouTube, foros y cursos para seguir creciendo en distintos aspectos del diseño. Tanto el UX/UI como la edición de video me ayudaron a ingresar al mundo 3D. Genero piezas para aplicar en estas áreas, con la libertad de construir un mundo propio.', en: 'I’ve always used YouTube, forums and courses to keep growing in different areas of design. Both UX/UI and video editing helped me get into the 3D world. I create pieces to apply in these areas, with the freedom to build a world of my own.' },
   'd3.cta': { es: 'Ver el proceso en Behance ↗', en: 'See the process on Behance ↗' },
   'd3.note.tag': { es: 'En desarrollo', en: 'In progress' },
   'd3.note.text': { es: 'La estoy armando de a poco. Voy a ir subiendo capturas del proceso a medida que termino piezas.', en: 'I’m building it up little by little. I’ll post process captures as I finish pieces.' },
@@ -202,8 +204,20 @@ const I18N_DICT = {
   window.i18nGetLang = () => lang;
   window.i18nApply = applyLang;
 
-  document.addEventListener('DOMContentLoaded', () => {
-    applyLang(lang);
+  /* Se aplica ya (sin esperar a DOMContentLoaded): este script va al final
+     del body, así que todo el HTML ya existe cuando corre. Es importante
+     que corra ANTES que main.js, que se carga justo después — main.js
+     envuelve frases como "Diseño para generar..." o "Creemos algo juntos."
+     palabra por palabra (spans .word) para el efecto de iluminado con el
+     scroll. Si este `applyLang` corriera después (como antes, en
+     DOMContentLoaded), pisaría el innerHTML ya envuelto por main.js con
+     texto plano de nuevo, dejando esos spans huérfanos: el scroll-trigger
+     de GSAP seguía animando nodos que ya no estaban en pantalla, y la
+     frase visible quedaba sin el efecto (parecía "no completarse" nunca).
+     Corriendo primero, main.js ve el texto ya en el idioma correcto y lo
+     envuelve una sola vez, sin que nadie se lo pise después. */
+  applyLang(lang);
+  {
     const langToggle = document.getElementById('langToggle');
     if (langToggle) {
       langToggle.addEventListener('click', () => {
@@ -212,5 +226,5 @@ const I18N_DICT = {
         applyLang(next);
       });
     }
-  });
+  }
 })();
