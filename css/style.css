@@ -640,10 +640,14 @@ ul{ margin:0; padding:0; list-style:none; }
 .grid-card h4{ font-family:var(--font-head); font-size:1.05rem; margin:16px 20px 6px; }
 .grid-card p{ color:var(--ink-soft); font-size:.85rem; margin:0 20px 18px; }
 .grid-img--video{
+  position:relative;
   display:flex; align-items:center; justify-content:center;
   background:linear-gradient(135deg, var(--dock-bg) 0%, #2A3947 100%);
 }
+.grid-img--video img{ position:absolute; inset:0; object-position:center; }
 .grid-img--video .play-btn{
+  position:relative; z-index:1;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
   width:48px; height:48px;
   border-radius:50%;
   background:rgba(255,255,255,.92);
