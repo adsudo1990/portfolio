@@ -1,7 +1,7 @@
 // Sergio Visgarra — Portfolio: traducción ES/EN
 const I18N_DICT = {
   'h.eyebrow': { es: 'Diseñador Digital', en: 'Digital Designer' },
-  'h.meta': { es: 'Puedo arrancar ya, híbrido o <span class="accent-text">100% remoto</span>', en: 'Available now, hybrid or <span class="accent-text">100% remote</span>' },
+  'h.meta': { es: 'Listo para trabajar <span class="accent-text">con vos</span>', en: 'Ready to work <span class="accent-text">with you</span>' },
   'h.cta.portfolio': { es: 'Ver portfolio', en: 'View portfolio' },
   'h.cta.contact': { es: 'Contactar', en: 'Contact' },
   'h.cta.cv': { es: 'Descargar CV (.pdf)', en: 'Download CV (.pdf)' },
@@ -139,7 +139,7 @@ const I18N_DICT = {
   'co.form.note': { es: 'Te abre el mail con el mensaje ya escrito. Acá no se guarda nada.', en: 'This opens your mail app with the message already written. Nothing is stored here.' },
 
   'co.side.tag': { es: 'Directo', en: 'Direct' },
-  'co.avail': { es: 'Puedo arrancar ya · Híbrido en CABA o 100% remoto', en: 'Available now · Hybrid in Buenos Aires or 100% remote' },
+  'co.avail': { es: 'Listo para trabajar <span class="accent-text">con vos</span> · Híbrido en CABA o 100% remoto', en: 'Ready to work <span class="accent-text">with you</span> · Hybrid in Buenos Aires or 100% remote' },
 
   'ct2.text': { es: 'Creemos algo juntos.', en: 'Let’s create something together.' },
 
